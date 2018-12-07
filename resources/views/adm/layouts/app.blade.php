@@ -18,6 +18,7 @@
     <!-- Styles -->
     <link rel="stylesheet" href=" {{ asset('css/materialize.css')}} ">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
     <link href="{{ asset('css/admin/app.css') }}" rel="stylesheet">
     <link href="{{ asset('icons/fontawesome/css/all.css') }}" rel="stylesheet">
 

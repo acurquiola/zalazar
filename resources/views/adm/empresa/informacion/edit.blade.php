@@ -23,7 +23,7 @@
 									</div>
 									<div class="file-path-wrapper">
 										<input class="file-path validate" type="text">
-										<span class="helper-text" data-error="wrong" data-success="right">Tamaño recomendado: 551x537</span>
+										<span class="helper-text" data-error="wrong" data-success="right">Tamaño recomendado: 555x432</span>
 									</div>
 								</div>
 							</div>
@@ -32,30 +32,10 @@
 							<div class="row">
 								
 								<div class="col s12">
-									<h6 for="textarea1">Misión</h6>
+									<h6 for="textarea1">Descripción</h6>
 								</div>
 								<div class="input-field col s12">
-									<textarea id="mision" name="mision"> {{ $empresa->mision }} </textarea>
-								</div>
-
-							</div>
-							<div class="row">
-								
-								<div class="col s12">
-									<h6 for="textarea1">Visión</h6>
-								</div>
-								<div class="input-field col s12">
-									<textarea id="vision" name="vision"> {{ $empresa->vision }} </textarea>
-								</div>
-
-							</div>
-							<div class="row">
-								
-								<div class="col s12">
-									<h6 for="textarea1">Valores</h6>
-								</div>
-								<div class="input-field col s12">
-									<textarea id="valores" name="valores"> {{ $empresa->valores }} </textarea>
+									<textarea id="descripcion" name="descripcion"> {{ $empresa->descripcion }} </textarea>
 								</div>
 
 							</div>
@@ -79,15 +59,7 @@
 <script src="//cdn.ckeditor.com/4.7.3/full/ckeditor.js"></script>
 <script>
 
-	CKEDITOR.replace('mision');
-	CKEDITOR.config.height = '150px';
-	CKEDITOR.config.width = '100%';
-	
-	CKEDITOR.replace('vision');
-	CKEDITOR.config.height = '150px';
-	CKEDITOR.config.width = '100%';
-	
-	CKEDITOR.replace('valores');
+	CKEDITOR.replace('descripcion');
 	CKEDITOR.config.height = '150px';
 	CKEDITOR.config.width = '100%';
 	

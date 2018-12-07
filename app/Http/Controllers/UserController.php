@@ -3,11 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Admin;
+use App\User;
 
 class UserController extends Controller
 {
-
     public function __construct()
     {
         $this->middleware('auth:admin');
@@ -18,49 +17,53 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($tipo)
     {
-        $usuarios = Admin::paginate(7);
+        $usuarios = User::where('tipo', $tipo)->paginate(7);
         return view('adm.usuarios.index', ['usuarios' => $usuarios]);
     }
 
-    public function create()
+    public function create($tipo)
     {
-        $tipo_usuario = ['admin' => 'Administrador', 'user' => 'Usuario'];
-        return view('adm.usuarios.create' , compact('tipo_usuario'));
+        $tipos = ['vendedor' => 'Vendedor', 'cliente' => 'Cliente'];
+        return view('adm.usuarios.create' , compact('tipo', 'tipos'));
     }
 
     public function store(Request $request)
     {
 
-        $user = new Admin ($request->all());
+        $user = new User ($request->all());
         $user->password = bcrypt($request->password);
+        
+        $user->tipo     = $request->tipo;
 
         if($user->save())
-             return redirect('adm/usuarios/user')->with('alert', "Usuario registrado exitósamente" );
+             return redirect()->back()->with('alert', "Usuario registrado exitósamente" );
         else
              return redirect()->back()->with('errors', "Ocurrió un error al intentar almacenar el registro" );
     }
 
-    public function edit($id){
-        $user         = Admin::find($id);
-        $tipo_usuario = ['admin' => 'Administrador', 'user' => 'Usuario'];
-        return view('adm.usuarios.edit', ['user' => $user, 'tipo_usuario' => $tipo_usuario]);
+    public function edit($tipo, $id){
+        $user = User::find($id);
+        $tipo = ['vendedor' => 'Vendedor', 'cliente' => 'Cliente'];
+        return view('adm.usuarios.edit', ['user' => $user, 'tipo' => $tipo]);
     }
 
-    public function update(Request $request, $id){
-        $user = Admin::find($id);
+    public function update(Request $request, $tipo, $id){
+        $user  = User::find($id);
         $user->fill($request->all());
-        $user->password= bcrypt($request->password);
+
+        $user->tipo     = $request->tipo;
+        $user->password = bcrypt($request->password);
 
         if($user->save())
-            return redirect('adm/usuarios/user')->with('alert', "Usuario actualizado exitósamente" );
+            return redirect()->back()->with('alert', "Usuario actualizado exitósamente" );
         else
             return redirect()->back()->with('errors', "Ocurrió un error al intentar actualizar el registro" );
     }
 
-    public function eliminar($id){
-        $user = Admin::find($id);
+    public function eliminar($tipo, $id){
+        $user = User::find($id);
 
         if($user->delete())
             return redirect()->back()->with('alert', "Usuario eliminado exitósamente" );

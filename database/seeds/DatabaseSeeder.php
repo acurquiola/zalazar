@@ -18,5 +18,9 @@ class DatabaseSeeder extends Seeder
         $this->call(MetadatosTableSeeder::class);
         $this->call(SlidersTableSeeder::class);
         $this->call(EmpresasTableSeeder::class);
+        $this->call(ClasificacionsTableSeeder::class);
+        $this->call(NovedadesTableSeeder::class);
+        $this->call(FamiliasTableSeeder::class);
+        $this->call(SubfamiliasTableSeeder::class);
     }
 }

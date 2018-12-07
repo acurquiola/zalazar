@@ -1,7 +1,9 @@
 
 	<ul id="slide-out" class="sidenav sidenav-fixed">
 		<div class="logo-admin">
-			<img class="responsive-img" src='{{ asset("images/logos/".$logos->file_image) }}' alt="">
+			<a href="{{ route('admin.dashboard') }}">
+				<img class="responsive-img" src='{{ asset("images/logos/".$logos->file_image) }}' alt="">
+			</a>
 		</div>
 
 		<div class="divider"></div>
@@ -12,10 +14,9 @@
 						<div class="collapsible-body" {{ (\Request::is('adm/home/*'))?"style=display:block;":"" }}>
 							<ul>
 								<li><a href="#"><i class="material-icons">navigate_next</i>Información</a></li>
-								<li><a href=""><i class="material-icons">navigate_next</i>Ver Descuentos</a></li>
-								<li><a href=""><i class="material-icons">navigate_next</i>Ver Productos</a></li>
-								<li><a href="#"><i class="material-icons">navigate_next</i>Crear Sliders</a></li>
-								<li><a href="#"><i class="material-icons">navigate_next</i>Ver Sliders</a></li>
+								<li><a href=""><i class="material-icons">navigate_next</i>Productos Destacados</a></li>
+								<li><a href="{{ action('SliderController@create', ['seccion' => 'home']) }}"><i class="material-icons">navigate_next</i>Crear Sliders</a></li>
+								<li><a href="{{ action('SliderController@index', ['seccion' => 'home']) }}"><i class="material-icons">navigate_next</i>Ver Sliders</a></li>
 							</ul>							
 						</div>
 					</li>
@@ -24,32 +25,22 @@
 					<li class="bold"><a class="collapsible-header waves-effect waves-grey {{ (\Request::is('adm/productos*'))?"seccion-activa":"" }}" tabindex="0" ><i class="material-icons">shopping_cart</i>Productos</a>
 						<div class="collapsible-body"  {{ (\Request::is('adm/productos*'))?"style=display:block;":"" }}>
 							<ul>
-								<li><a href="#" ><i class="material-icons">navigate_next</i>Crear Producto</a></li>
-								<li><a href="#" ><i class="material-icons">navigate_next</i>Ver productos</a></li>
-								<li><a href="#" ><i class="material-icons">navigate_next</i>Crear Categorías</a></li>
-								<li><a href="#" ><i class="material-icons">navigate_next</i>Ver Categorías</a></li>
-								<li><a href="#" ><i class="material-icons">navigate_next</i>Ver Unidades de Medición</a></li>
+								<li><a href="{{ action('ProductoController@create') }}" ><i class="material-icons">navigate_next</i>Crear Producto</a></li>
+								<li><a href="{{ action('ProductoController@index') }}" ><i class="material-icons">navigate_next</i>Ver Productos</a></li>
+								<li><a href="{{ action('SubfamiliaController@create') }}" ><i class="material-icons">navigate_next</i>Crear Subfamilia</a></li>
+								<li><a href="{{ action('SubfamiliaController@index') }}" ><i class="material-icons">navigate_next</i>Ver Subfamilias</a></li>
+								<li><a href="{{ action('FamiliaController@create') }}" ><i class="material-icons">navigate_next</i>Crear Familia</a></li>
+								<li><a href="{{ action('FamiliaController@index') }}" ><i class="material-icons">navigate_next</i>Ver Familias</a></li>
 							</ul>
 						</div>
 					</li>
 				</ul>
 			 	<ul class="collapsible collapsible-accordion">
-					<li class="bold"><a class="collapsible-header waves-effect waves-grey {{ (\Request::is('adm/general*'))?"seccion-activa":"" }}" tabindex="0" ><i class="fas fa-clipboard-list"></i>Códigos Postales</a>
-						<div class="collapsible-body"  {{ (\Request::is('adm/general*'))?"style=display:block;":"" }}>
+					<li class="bold"><a class="collapsible-header waves-effect waves-grey {{ (\Request::is('adm/catalogo*'))?"seccion-activa":"" }}" tabindex="0" ><i class="fas fa-file-download"></i>Catálogos</a>
+						<div class="collapsible-body"  {{ (\Request::is('adm/catalogo*'))?"style=display:block;":"" }}>
 							<ul>
-								<li><a href="#" ><i class="material-icons">navigate_next</i>Cargar Archivo</a></li>
-							</ul>
-						</div>
-					</li>
-				</ul>
-			 	<ul class="collapsible collapsible-accordion">
-					<li class="bold"><a class="collapsible-header waves-effect waves-grey {{ (\Request::is('adm/preguntas*'))?"seccion-activa":"" }}" tabindex="0" ><i class="fas fa-question-circle"></i>Preguntas Frecuentes</a>
-						<div class="collapsible-body"  {{ (\Request::is('adm/preguntas*'))?"style=display:block;":"" }}>
-							<ul>
-								<li><a href="#"><i class="material-icons">navigate_next</i>Crear Categoría</a></li>
-								<li><a href="#" ><i class="material-icons">navigate_next</i>Ver Categoría</a></li>
-								<li><a href="#" ><i class="material-icons">navigate_next</i>Crear Preguntas</a></li>
-								<li><a href="#" ><i class="material-icons">navigate_next</i>Ver Preguntas</a></li>
+								<li><a href="{{ action('DescargaController@create') }}" ><i class="material-icons">navigate_next</i>Cargar Catálogo</a></li>
+								<li><a href="{{ action('DescargaController@index') }}" ><i class="material-icons">navigate_next</i>Ver Catálogos</a></li>
 							</ul>
 						</div>
 					</li>
@@ -58,10 +49,10 @@
 					<li class="bold"><a class="collapsible-header waves-effect waves-grey {{ (\Request::is('adm/novedades*'))?"seccion-activa":"" }}" tabindex="0" ><i class="material-icons">new_releases</i>Novedades</a>
 						<div class="collapsible-body"  {{ (\Request::is('adm/novedades*'))?"style=display:block;":"" }}>
 							<ul>
-								<li><a href="#"><i class="material-icons">navigate_next</i>Crear Categoría</a></li>
-								<li><a href="#" ><i class="material-icons">navigate_next</i>Ver Categorías</a></li>
-								<li><a href="#" ><i class="material-icons">navigate_next</i>Crear Novedad</a></li>
-								<li><a href="#" ><i class="material-icons">navigate_next</i>Ver Novedades</a></li>
+								<li><a href="{{ action('ClasificacionController@create') }}"><i class="material-icons">navigate_next</i>Crear Categoría</a></li>
+								<li><a href="{{ action('ClasificacionController@index') }}" ><i class="material-icons">navigate_next</i>Ver Categorías</a></li>
+								<li><a href="{{ action('NovedadController@create') }}" ><i class="material-icons">navigate_next</i>Crear Novedad</a></li>
+								<li><a href="{{ action('NovedadController@index') }}" ><i class="material-icons">navigate_next</i>Ver Novedades</a></li>
 							</ul>
 						</div>
 					</li>
@@ -70,9 +61,9 @@
 					<li class="bold"><a class="collapsible-header waves-effect waves-grey {{ (\Request::is('adm/empresa*'))?"seccion-activa":"" }}" tabindex="0"  ><i class="material-icons">business</i>Quiénes Somos</a>
 						<div class="collapsible-body"  {{ (\Request::is('adm/empresa*'))?"style=display:block;":"" }}>
 							<ul>
-								<li><a href="#"><i class="material-icons">navigate_next</i>Datos de la Empresa</a></li>
-								<li><a href="#"><i class="material-icons">navigate_next</i>Crear Sliders</a></li>
-								<li><a href="#"><i class="material-icons">navigate_next</i>Ver Sliders</a></li>
+								<li><a href="{{ action('EmpresaController@index') }}"><i class="material-icons">navigate_next</i>Datos de la Empresa</a></li>
+								<li><a href="{{ action('SliderController@create', ['seccion' => 'empresa']) }}"><i class="material-icons">navigate_next</i>Crear Sliders</a></li>
+								<li><a href="{{ action('SliderController@index', ['seccion' => 'empresa']) }}"><i class="material-icons">navigate_next</i>Ver Sliders</a></li>
 							</ul>
 						</div>
 					</li>
@@ -105,24 +96,39 @@
 					</li>
 				</ul>
 				<ul class="collapsible collapsible-accordion">
-					<li class="bold"><a class="collapsible-header waves-effect waves-grey {{ (\Request::is('adm/clientes/*'))?"seccion-activa":"" }}" tabindex="0"  ><i class="material-icons">people</i>Clientes</a>
-						<div class="collapsible-body"  {{ (\Request::is('adm/clientes/*'))?"style=display:block;":"" }}>
+					<li class="bold"><a class="collapsible-header waves-effect waves-grey {{ (\Request::is('adm/usuarios/cliente/*'))?"seccion-activa":"" }}" tabindex="0"  ><i class="material-icons">account_circle</i>Clientes</a>
+						<div class="collapsible-body"  {{ (\Request::is('adm/usuarios/cliente/*'))?"style=display:block;":"" }}>
 							<ul>
-								<li><a href=""><i class="material-icons">navigate_next</i>Ver Clientes</a></li>
+								<li><a href="{{ action('UserController@create', ['tipo' => 'cliente']) }}"><i class="material-icons">navigate_next</i>Crear Cliente</a></li>
+								<li><a href="{{ action('UserController@index', ['tipo' => 'cliente']) }}"><i class="material-icons">navigate_next</i>Ver Clientes</a></li>
 							</ul>
 						</div>
 					</li>
 				</ul>
 				<ul class="collapsible collapsible-accordion">
-					<li class="bold"><a class="collapsible-header waves-effect waves-grey {{ (\Request::is('adm/usuarios/*'))?"seccion-activa":"" }}" tabindex="0"  ><i class="material-icons">people</i>Usuarios</a>
-						<div class="collapsible-body"  {{ (\Request::is('adm/usuarios/*'))?"style=display:block;":"" }}>
+					<li class="bold"><a class="collapsible-header waves-effect waves-grey {{ (\Request::is('adm/usuarios/vendedor/*'))?"seccion-activa":"" }}" tabindex="0"  ><i class="material-icons">assignment_ind</i>Vendedores</a>
+						<div class="collapsible-body"  {{ (\Request::is('adm/usuarios/vendedor/*'))?"style=display:block;":"" }}>
 							<ul>
-								<li><a href="#"><i class="material-icons">navigate_next</i>Crear Usuario</a></li>
-								<li><a href="#"><i class="material-icons">navigate_next</i>Editar Usuarios</a></li>
+								<li><a href="{{ action('UserController@create', ['tipo' => 'vendedor']) }}"><i class="material-icons">navigate_next</i>Crear Vendedor</a></li>
+								<li><a href="{{ action('UserController@index', ['tipo' => 'vendedor']) }}"><i class="material-icons">navigate_next</i>Ver Vendedores</a></li>
 							</ul>
 						</div>
 					</li>
 				</ul>
+				@if(\Auth::user()->tipo == 'admin')
+
+					<ul class="collapsible collapsible-accordion">
+						<li class="bold"><a class="collapsible-header waves-effect waves-grey {{ (\Request::is('adm/admins/*'))?"seccion-activa":"" }}" tabindex="0"  ><i class="material-icons">people</i>Usuarios</a>
+							<div class="collapsible-body"  {{ (\Request::is('adm/admins/*'))?"style=display:block;":"" }}>
+								<ul>
+									<li><a href="{{ action('AdminController@create') }}"><i class="material-icons">navigate_next</i>Crear Usuario</a></li>
+									<li><a href="{{ action('AdminController@listar') }}"><i class="material-icons">navigate_next</i>Editar Usuarios</a></li>
+								</ul>
+							</div>
+						</li>
+					</ul>
+
+				@endif
 			</li>
 		</div>
 	</ul>

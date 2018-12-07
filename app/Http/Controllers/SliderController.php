@@ -16,35 +16,18 @@ class SliderController extends Controller
 
 	public function index($seccion)
     {
-    	if($seccion=='home')
-    	 	$vista = 'adm.home.sliders.index';
-    	elseif($seccion=='empresa')
-    	 	$vista = 'adm.empresa.sliders.index';
-
         $sliders = Slider::where('seccion', $seccion)->orderBy('orden', 'asc')->get();
 
-        return view($vista, compact('sliders'));
+        return view('adm.sliders.index', compact('sliders', 'seccion'));
     }
 
     public function create($seccion)
     {
-        if($seccion=='home')
-            $vista = 'adm.home.sliders.create';
-        elseif($seccion=='empresa')
-            $vista = 'adm.empresa.sliders.create';
-
-        return view($vista);
+        return view('adm.sliders.create', compact('seccion'));
     }
 
     public function store(Request $request, $seccion)
     {
-
-        if($seccion=='home')
-            $vista = 'adm.home.sliders.index';
-        elseif($seccion=='empresa')
-            $vista = 'adm.empresa.sliders.index';
-
-
         $slider    = new Slider;
         $datos     = $request->all();
 
@@ -63,25 +46,13 @@ class SliderController extends Controller
 
     public function edit($seccion, $id)
     {
-    	if($seccion=='home')
-    	 	$vista = 'adm.home.sliders.edit';
-    	elseif($seccion=='empresa')
-    	 	$vista = 'adm.empresa.sliders.edit';
-
         $slider = Slider::find($id);
 
-        return view($vista, compact('slider'));
+        return view('adm.sliders.edit', compact('seccion', 'slider'));
     }
 
     public function update(Request $request, $seccion, $id)
     {
-
-        if($seccion=='home')
-            $vista = 'adm.home.sliders.index';
-        elseif($seccion=='empresa')
-            $vista = 'adm.empresa.sliders.index';
-
-
 
         $slider    = Slider::find($id);
         $datos     = $request->all();

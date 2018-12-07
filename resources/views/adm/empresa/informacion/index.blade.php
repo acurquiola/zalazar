@@ -8,16 +8,8 @@
 					<tbody>
 						@if($empresa)
 							<tr>
-								<td><b>Misión</b></td>
-								<td>{!! $empresa->mision !!}</td>
-							</tr>
-							<tr>
-								<td><b>Visión</b></td>
-								<td>{!! $empresa->vision !!}</td>
-							</tr>
-							<tr>
-								<td><b>Valores</b></td>
-								<td>{!! $empresa->valores !!}</td>
+								<td><b>Descripción</b></td>
+								<td>{!! $empresa->descripcion !!}</td>
 							</tr>
 							<tr>
 								<td><b>Imagen</b></td>

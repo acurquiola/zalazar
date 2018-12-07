@@ -17,8 +17,8 @@ class SlidersTableSeeder extends Seeder
 				'id'         => 1,
 				'file_image' => 'sliders__slider1.jpg',
 				'seccion'    => 'home',
-				'titulo'     => 'ALTA TECNOLOGÍA Y CALIDAD',
-				'descripcion'=> 'Venta mayorista y minorista de insumos químicos',
+				'titulo'     => 'CALIDAD Y SERVICIO',
+				'descripcion'=> 'Accesorios y repuestos de Sanitarios',
 				'orden'      => 'aa',
 			),
 			1 => 
@@ -26,8 +26,8 @@ class SlidersTableSeeder extends Seeder
 				'id'         => 2,
 				'file_image' => 'sliders__slider2.jpg',
 				'seccion'    => 'empresa',
-				'titulo'     => '',
-				'descripcion'=> '' ,
+				'titulo'     => 'AMPLIA TRAYECTORIA EN EL RUBRO',
+				'descripcion'=> 'Somos Especialistas' ,
 				'orden'      => 'aa',
 			),
 		));    

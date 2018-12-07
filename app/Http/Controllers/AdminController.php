@@ -9,7 +9,7 @@ class AdminController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:admin',['only' => 'index','edit']);
+        $this->middleware('auth:admin');
     }
     /**
      * Display a listing of the resource.
@@ -20,14 +20,17 @@ class AdminController extends Controller
     {
         return view('adm.dashboard');
     }
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+    public function listar()
+    {
+        $usuarios = Admin::paginate(7);
+        return view('adm.admins.index', ['usuarios' => $usuarios]);
+    }
+
     public function create()
     {
-        return view('adm.auth.register');
+        $tipo = ['admin' => 'Administrador', 'usuario' => 'Usuario'];
+        return view('adm.admins.create' , compact('tipo'));
     }
     /**
      * Store a newly created resource in storage.
@@ -40,56 +43,41 @@ class AdminController extends Controller
         // validate the data
         $this->validate($request, [
           'name'     => 'required',
-          'email'    => 'required',
+          'username' => 'required',
           'password' => 'required'
           ]);
         // store in the database
         $admins           = new Admin;
         $admins->name     = $request->name;
-        $admins->email    = $request->email;
+        $admins->username    = $request->username;
         $admins->password = bcrypt($request->password);
         $admins->save();
         return redirect()->route('admin.auth.login');
     }
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+
+    public function edit($id){
+        $user         = Admin::find($id);
+        $tipo = ['admin' => 'Administrador', 'usuario' => 'Usuario'];
+        return view('adm.admins.edit', ['user' => $user, 'tipo' => $tipo]);
     }
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+
+    public function update(Request $request, $id){
+        $user = Admin::find($id);
+        $user->fill($request->all());
+        $user->password= bcrypt($request->password);
+
+        if($user->save())
+            return redirect('adm/admin/listar')->with('alert', "Usuario actualizado exitósamente" );
+        else
+            return redirect()->back()->with('errors', "Ocurrió un error al intentar actualizar el registro" );
     }
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+
+    public function eliminar($id){
+        $user = Admin::find($id);
+
+        if($user->delete())
+            return redirect()->back()->with('alert', "Usuario eliminado exitósamente" );
+        else
+            return redirect()->back()->with('errors', "Ocurrió un error al intentar eliminar el registro" );
     }
 }
