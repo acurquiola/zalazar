@@ -12,6 +12,10 @@
 			closeOnClick: false,
 			hover: true
 		});
+		$('.dropdown-login').dropdown({
+			constrainWidth: false,
+			closeOnClick: false,
+		});
 	});
 
 </script>

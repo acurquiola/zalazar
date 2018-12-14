@@ -4,7 +4,7 @@
 
 				<h5>Novedades</h5>					
 				<div class="divider"></div>
-				<table class="index-table-logos responsive-table ">
+				<table class="index-table-logos responsive-table mdl-data-table hover" id="table"  style="width:100%">
 					<thead>
 						<tr>
 							<th>Imagen</th>
@@ -18,14 +18,15 @@
 					<tbody>
 						@forelse($novedades as $n)
 							<tr>
-								<td style="width: 200px;"><img src="{{ asset('images/novedades/'.$n->file_image) }}"></td>
+								<td style="width: 150px;"><img src="{{ asset('images/novedades/'.$n->file_image) }}"></td>
 								<td style="width: 100px;">{{ $n->titulo }}</td>
 								<td style="width: 250px;">{!! substr($n->texto, 0, 150) !!} ...</td>
 								<td>{{ $n->clasificacion->nombre }}</td>
 								<td>{{ $n->orden }}</td>
 								<td>
-									<a href=" {{ action('NovedadController@edit', $n->id)}} " class="btn-floating btn-large waves-effect waves-light orange"><i class="fas fa-pencil-alt"></i></a>
-									<a onclick="return confirm('¿Realmente desea eliminar este registro?')"  href=" {{ action('NovedadController@eliminar', $n->id)}} " class="btn-floating btn-large waves-effect waves-light deep-orange"><i class="fas fa-trash-alt"></i></a>
+									<a href=" {{ action('NovedadController@edit', $n->id)}} " class="btn-floating btn waves-effect waves-light orange"><i style="font-size: 15px;" class="fas fa-pencil-alt"></i></a>
+									<a href=" {{ action('ImagenController@index', $n->id)}}" class="btn-floating btn waves-effect waves-light teal"><i title="Ver galeria de imágenes" class="material-icons">photo_library</i></a>
+									<a onclick="return confirm('¿Realmente desea eliminar este registro?')"  href=" {{ action('NovedadController@eliminar', $n->id)}} " class="btn-floating btn waves-effect waves-light deep-orange"><i style="font-size: 15px;" class="fas fa-trash-alt"></i></a>
 
 								</td>
 							</tr>

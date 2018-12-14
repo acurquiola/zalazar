@@ -16,6 +16,7 @@ class ProductosImport implements ToModel
     */
     public function model(array $row)
     {
+        /*Validar que sea el final del archivo*/
         $familia      = trim($row[0]);
         $subfamilia   = trim($row[1]);
         $codigo       = trim($row[2]);
@@ -23,7 +24,7 @@ class ProductosImport implements ToModel
         $presentacion = trim($row[4]);
         $precio       = trim($row[5]);
 
-        if($familia != "Familia" && $subfamilia != "Subfamilia" && $codigo != "Código" && $descripcion != 'Denominación' && $presentacion != 'Presentación' && $precio != 'Precio'){
+        if($familia != "Familia" && $subfamilia != "Categoria" && $codigo != "Codigo" && $descripcion != 'Denominacion' && $presentacion != 'Presentacion' && $precio != 'Precio'){
             $producto = Producto::where('codigo', $codigo)->first();
             if(!$producto){
                 $f = Familia::where('nombre', 'like', $familia)->first();

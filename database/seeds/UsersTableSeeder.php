@@ -12,22 +12,34 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
     	\DB::table('users')->insert(array (
-    		0 =>
+            0 =>
+            array (
+                'id'       => 1,
+                'name'     => 'Ninguno',
+                'username' => 'ninguno',
+                'email'    => 'Ninguno@osole.es',
+                'tipo'     => 'vendedor',
+                'parent_id'=> 1,
+                'password' => bcrypt('osole'),
+            ),
+    		1 =>
     		array (
-    			'id'       => 1,
+    			'id'       => 2,
     			'name'     => 'Osole Vendedor',
     			'username' => 'vendedor',
     			'email'    => 'vendedor@osole.es',
     			'tipo'     => 'vendedor',
+                'parent_id'=> 1,
     			'password' => bcrypt('osole'),
     		),
-    		1 =>
+    		2 =>
     		array (
-    			'id'       => 2,
+    			'id'       => 3,
     			'name'     => 'Osole Comprador',
     			'username' => 'comprador',
     			'email'    => 'comprador@osole.es',
     			'tipo'     => 'cliente',
+                'parent_id'=> 2,
     			'password' => bcrypt('osole'),
     		),
     	));

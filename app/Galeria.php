@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Galeria extends Model
 {
     protected $fillable = [
-    	'orden', 'file_image'
+    	'orden', 'file_image', 'tipo'
     ];
 
 

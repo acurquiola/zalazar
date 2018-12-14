@@ -14,4 +14,9 @@ class Novedad extends Model
     {
     	return $this->belongsTo('App\Clasificacion');
     }   
+    
+    public function galerias()
+    {
+        return $this->hasMany('App\Imagen');
+    }
 }

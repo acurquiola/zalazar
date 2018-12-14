@@ -93,10 +93,10 @@ class GaleriaController extends Controller
         $subfamilia = Subfamilia::find($galeria->subfamilia->id);
         $path       = $galeria->file_image;
 
-        \File::exists(public_path('images/productos_galeria/'.$galeria->file_image));
+        \File::exists(public_path('images/galeria_productos/'.$galeria->file_image));
 
         if($galeria->delete()){
-            \File::delete(public_path('images/productos_galeria/'.$path));
+            \File::delete(public_path('images/galeria_productos/'.$path));
             $galeria = Galeria::where('subfamilia_id', $subfamilia->id)->get();
             return redirect()->back()->with('alert', "Registro eliminado exitósamente" );
         }else{

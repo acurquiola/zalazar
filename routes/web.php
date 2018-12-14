@@ -13,10 +13,55 @@
 
 Route::get('/', 'SeccionHomeController@index');
 
+Route::get('empresa', 'SeccionEmpresaController@index');
+
+Route::get('catalogo', 'SeccionCatalogoController@index');
+
+//Sección de Novedades
+Route::get('/novedades', 'SeccionNovedadesController@index');
+Route::get('/novedades/filtros/{id}', 'SeccionNovedadesController@filter')->name('filtros');
+Route::get('/novedades/ver/{id}', 'SeccionNovedadesController@ver')->name('ver');
+
+
+//Sección de Contacto
+Route::resource('/contacto', 'SeccionContactoController');
+
+//Descarga-Seccion
+	Route::get('/catalogo-view/{file}', function ($file) {
+		return Storage::response("descargas/$file");
+	})->name('descargas-view');
+
+	Route::get('/catalogo-down/{file}', function ($file) {
+		return Storage::download("descargas/$file");
+	})->name('descargas-down');
+
+
+Route::get('novedades', 'SeccionNovedadesController@index');
+
+
+//Seccion de Productos
+Route::get('/productos', 'SeccionProductoController@index');
+Route::get('/productos/{id}', 'SeccionProductoController@show');
+Route::get('/productos/verProductos/{id}', 'SeccionProductoController@showProductos');
+Route::get('/productos/ver/{id}', 'SeccionProductoController@showProducto');
+
+Route::get('/productos-down/{file}', function ($file) {
+	return Storage::download("subfamilias/$file");
+})->name('productos-down');
+
+
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
 
+Route::prefix('privada')->group(function () {
+
+	Route::get('/', 'SeccionPrivadaController@index')->name('privada');
+	Route::get('/cliente/{id}', 'SeccionPrivadaController@cliente')->name('privada');
+	Route::post('store', 'SeccionPrivadaController@store');
+	Route::post('remove', 'SeccionPrivadaController@remover');
+
+	Route::get('pedido', 'SeccionPrivadaController@pedido');
+});
 
 
 Route::prefix('adm')->group(function () {
@@ -34,6 +79,9 @@ Route::prefix('adm')->group(function () {
 	Route::put('admin/update/{id}', 'AdminController@update');
 	Route::get('admin/eliminar/{id}', 'AdminController@eliminar');
 
+	
+	//Ruta para la gestión de logos
+	Route::resource('general/condiciones', 'CondicionController');
 	
 	//Ruta para la gestión de logos
 	Route::resource('logos', 'LogoController');
@@ -55,6 +103,15 @@ Route::prefix('adm')->group(function () {
 		//Categorias de Novedades
 			Route::resource('/categorias', 'ClasificacionController');
 			Route::get('/categorias/delete/{id}', 'ClasificacionController@eliminar');
+
+		Route::prefix('galerias/')->group(function () {
+			Route::get('index/{id}', 'ImagenController@index');
+			Route::get('create/{id}', 'ImagenController@create');
+			Route::post('store', 'ImagenController@store');
+			Route::get('edit/{id}', 'ImagenController@edit');
+			Route::put('update/{id}', 'ImagenController@update');
+			Route::get('delete/{id}', 'ImagenController@eliminar');
+		});
 	});
 
 
@@ -109,8 +166,8 @@ Route::prefix('adm')->group(function () {
 			Route::get('delete/{id}', 'GaleriaController@eliminar');
 		});
 
-	});
 
+	});
 
 	//Ruta para la gestión de clientes/Vendedores
 	Route::prefix('usuarios')->group(function () {

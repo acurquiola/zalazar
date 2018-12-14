@@ -5,9 +5,9 @@
 
 <body>
 
-	
+	@include('page.partials.slider')
 
-	
+
 	@endsection
 
 	@include('layouts.script')

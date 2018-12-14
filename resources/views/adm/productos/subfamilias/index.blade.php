@@ -25,7 +25,7 @@
 								<td>{{ ($f->file_ficha != null)?'SÍ':'NO' }}</td>
 								<td>
 									<a href=" {{ action('SubfamiliaController@edit', $f->id)}} " class="btn-floating btn waves-effect waves-light orange"><i style="font-size: 15px;" class="fas fa-pencil-alt"></i></a>										
-									<a href=" {{ action('GaleriaController@index', $f->id)}}" class="btn-floating btn waves-effect waves-light teal"><i title="Ver galeria de imágenes" class="material-icons">photo_library</i></a>
+									<a href=" {{ action('GaleriaController@index', ['id' => $f->id, 'tipo' => 'productos'])}}" class="btn-floating btn waves-effect waves-light teal"><i title="Ver galeria de imágenes" class="material-icons">photo_library</i></a>
 									<a onclick="return confirm('¿Realmente desea eliminar este registro?')"  href=" {{ action('SubfamiliaController@eliminar', $f->id)}} " class="btn-floating btn waves-effect waves-light deep-orange"><i style="font-size: 15px;" class="fas fa-trash-alt"></i></a>
 
 								</td>

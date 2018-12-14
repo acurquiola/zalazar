@@ -1,10 +1,13 @@
 
 
-#header-top{
+.header-top{
     min-height: 35px !important;
     background: #F5F5F5;
     height: 25% !important;
     border-bottom: 3px solid #5E8AC3;
+}
+.header-top-ul{
+    margin-right: -20%;
 }
 
 .header-top-ul li, .header-top-ul li a{
@@ -22,7 +25,8 @@
 #header{
     background: #FFFFFF;
     height: 150px;
-    font-family: 'Montserrat Bold'
+    font-family: 'Montserrat Bold';
+    margin-bottom: 3px;
 }
 
 #header i{
@@ -32,7 +36,7 @@
 
 .header-top-ul li a:hover{
     border: 0 !important;
-    margin-top: -4px;
+    margin-top: -4px
 }
 
 
@@ -46,7 +50,7 @@
     justify-content: center; 
     align-items: center;
     padding-top: 2%;
-    margin-right: -9%;
+    margin-right: -5%;
 }
 
 .header-secciones li a{

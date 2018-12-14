@@ -21,17 +21,17 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="{{ asset('css/fonts.css') }}" rel="stylesheet">
     <link href="{{ asset('css/layouts/navbar.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/layouts/footer.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/layouts/login.css') }}" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/footer.css') }}" rel="stylesheet">
-
-  <!--   <link href="{{ asset('css/page/home.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/page/home.css') }}" rel="stylesheet">
     <link href="{{ asset('css/page/empresa.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/page/calidad.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/page/produccion.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/page/catalogo.css') }}" rel="stylesheet">
     <link href="{{ asset('css/page/novedades.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/page/contacto.css') }}" rel="stylesheet"> 
     <link href="{{ asset('css/page/producto.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/page/contacto.css') }}" rel="stylesheet"> -->
-    
+    <link href="{{ asset('css/page/privada/home.css') }}" rel="stylesheet">
+   
     <link href="{{ asset('icons/fontawesome/css/all.css') }}" rel="stylesheet">
 
     <script src='https://www.google.com/recaptcha/api.js'></script>

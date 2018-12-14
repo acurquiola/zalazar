@@ -16,6 +16,7 @@ class CreateGaleriasTable extends Migration
         Schema::create('galerias', function (Blueprint $table) {
             $table->increments('id');
             $table->string('orden')->nullable();
+            $table->string('tipo')->nullable();
             $table->string('file_image')->default('no-image.jpg')->nullable();
             $table->unsignedInteger('subfamilia_id');
             $table->foreign('subfamilia_id')->references('id')->on('subfamilias')->onDelete('cascade');
