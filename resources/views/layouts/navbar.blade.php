@@ -79,7 +79,7 @@
 							<li><a href=" {{ url('/productos')}} " {{ (\Request::is('productos*'))?"id=seccion-active":"" }}>Productos</a></li>
 							<li><a href=" {{ url('/ofertas')}} " {{ (\Request::is('ofertas*'))?"id=seccion-active":"" }}>Ofertas</a></li>
 							<li><a href=" {{ url('/privada/pedido')}} " {{ (\Request::is('privada/pedido*'))?"id=seccion-active":"" }}>Pedidos</a></li>
-							<li><a href=" {{ url('/precios')}} " {{ (\Request::is('precios*'))?"id=seccion-active":"" }}>Lista de Precios</a></li>      
+							<li><a href=" {{ url('listado')}} " {{ (\Request::is('listado*'))?"id=seccion-active":"" }}>Lista de Precios</a></li>      
 							<li><a href=" {{ url('/historial')}} " {{ (\Request::is('historial*'))?"id=seccion-active":"" }}>Histórico de Compras</a></li>            
 						</ul>
 					</div>

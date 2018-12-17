@@ -46,6 +46,25 @@
 					</li>
 				</ul>
 			 	<ul class="collapsible collapsible-accordion">
+					<li class="bold"><a class="collapsible-header waves-effect waves-grey {{ (\Request::is('adm/listado*'))?"seccion-activa":"" }}" tabindex="0" ><i class="fas fa-dollar-sign"></i></i>Lista de Precios</a>
+						<div class="collapsible-body"  {{ (\Request::is('adm/listado*'))?"style=display:block;":"" }}>
+							<ul>
+								<li><a href="{{ action('PrecioController@create') }}" ><i class="material-icons">navigate_next</i>Cargar Listado</a></li>
+								<li><a href="{{ action('PrecioController@index') }}" ><i class="material-icons">navigate_next</i>Ver Listado</a></li>
+							</ul>
+						</div>
+					</li>
+				</ul>
+				<ul class="collapsible collapsible-accordion">
+					<li class="bold"><a class="collapsible-header waves-effect waves-grey {{ (\Request::is('adm/descuentos*'))?"seccion-activa":"" }}" tabindex="0"  ><i class="fas fa-percentage"></i>Descuentos</a>
+						<div class="collapsible-body"  {{ (\Request::is('adm/descuentos*'))?"style=display:block;":"" }}>
+							<ul>
+								<li><a href="{{ action('DescuentoController@index') }}"><i class="material-icons">navigate_next</i>Definir descuentos</a></li>
+							</ul>
+						</div>
+					</li>
+				</ul>
+			 	<ul class="collapsible collapsible-accordion">
 					<li class="bold"><a class="collapsible-header waves-effect waves-grey {{ (\Request::is('adm/novedades*'))?"seccion-activa":"" }}" tabindex="0" ><i class="material-icons">new_releases</i>Novedades</a>
 						<div class="collapsible-body"  {{ (\Request::is('adm/novedades*'))?"style=display:block;":"" }}>
 							<ul>

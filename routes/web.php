@@ -16,6 +16,7 @@ Route::get('/', 'SeccionHomeController@index');
 Route::get('empresa', 'SeccionEmpresaController@index');
 
 Route::get('catalogo', 'SeccionCatalogoController@index');
+Route::get('listado', 'SeccionPrecioController@index');
 
 //Sección de Novedades
 Route::get('/novedades', 'SeccionNovedadesController@index');
@@ -34,6 +35,16 @@ Route::resource('/contacto', 'SeccionContactoController');
 	Route::get('/catalogo-down/{file}', function ($file) {
 		return Storage::download("descargas/$file");
 	})->name('descargas-down');
+
+
+//Descarga-Lista de Precios
+	Route::get('/listado-view/{file}', function ($file) {
+		return Storage::response("descargas/$file");
+	})->name('listado-view');
+
+	Route::get('/listado-down/{file}', function ($file) {
+		return Storage::download("descargas/$file");
+	})->name('listado-down');
 
 
 Route::get('novedades', 'SeccionNovedadesController@index');
@@ -61,6 +72,7 @@ Route::prefix('privada')->group(function () {
 	Route::post('remove', 'SeccionPrivadaController@remover');
 
 	Route::get('pedido', 'SeccionPrivadaController@pedido');
+	Route::post('confirmar', 'SeccionPrivadaController@confirmar');
 });
 
 
@@ -88,6 +100,9 @@ Route::prefix('adm')->group(function () {
 
 	//Ruta para la gestión de metadatos
 	Route::resource('metadatos', 'MetadatoController');
+
+	//Ruta para la gestión de descuentos
+	Route::resource('descuentos', 'DescuentoController');
 
 	//Ruta para la gestión de usuarios 
 	Route::prefix('empresa/')->group(function () {
@@ -138,6 +153,15 @@ Route::prefix('adm')->group(function () {
 	//Descargas de Catálogo
 		Route::resource('/descargas', 'DescargaController');
 		Route::get('delete/{id}', 'DescargaController@eliminar');
+	});
+
+
+
+    // Admin Listado de PRecios
+	Route::prefix('listado')->group(function () {
+	//Descargas de Catálogo
+		Route::resource('/descargas', 'PrecioController');
+		Route::get('delete/{id}', 'PrecioController@eliminar');
 	});
 
 

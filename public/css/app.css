@@ -28,6 +28,19 @@
     border-radius: 25px;
     margin-top: 3%;
     margin-bottom: 3%;
+    font-weight: 900;
+}
+
+#estandar-otro-btn{
+    background: #FFFFFF;
+    font-size: 13px;
+    font-family: 'Montserrat';
+    color: #425E89;
+    border-radius: 25px;
+    margin-top: 3%;
+    margin-bottom: 3%;
+    border: 2px solid #425E89;
+    font-weight: 900;
 }
 
 .alert-error{

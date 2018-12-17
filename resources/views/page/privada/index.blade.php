@@ -37,6 +37,14 @@
 						</div>
 					@endif
 
+				@else
+
+					<div class="center">
+						
+						<p>Bienvenido. </p>
+						<a href="{{ action('SeccionProductoController@index') }}" class=" z-depth-0 btn button-continuar-compra center-align" id="estandar-otro-btn">VER PRODUCTOS</a>					
+
+					</div>
 				@endif
 			</div>
 

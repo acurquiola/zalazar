@@ -31,6 +31,7 @@
     <link href="{{ asset('css/page/contacto.css') }}" rel="stylesheet"> 
     <link href="{{ asset('css/page/producto.css') }}" rel="stylesheet">
     <link href="{{ asset('css/page/privada/home.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/page/privada/pedido.css') }}" rel="stylesheet">
    
     <link href="{{ asset('icons/fontawesome/css/all.css') }}" rel="stylesheet">
 

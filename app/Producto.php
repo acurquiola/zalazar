@@ -20,4 +20,10 @@ class Producto extends Model
     	return $this->belongsTo('App\Subfamilia');
     }   
 
+    public function pedido()
+    {
+        return $this->belongsToMany('App\Pedido')->withPivot('id', 'pedido_id', 'producto_id', 'cantidad');
+    }
+
+
 }
