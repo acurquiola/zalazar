@@ -17,6 +17,7 @@ Route::get('empresa', 'SeccionEmpresaController@index');
 
 Route::get('catalogo', 'SeccionCatalogoController@index');
 Route::get('listado', 'SeccionPrecioController@index');
+Route::get('historial', 'SeccionPrivadaController@historico');
 
 //Sección de Novedades
 Route::get('/novedades', 'SeccionNovedadesController@index');

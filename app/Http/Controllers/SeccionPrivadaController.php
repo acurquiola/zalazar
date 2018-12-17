@@ -130,4 +130,16 @@ class SeccionPrivadaController extends Controller
         return response()->json(array("text"=>'Done!',"status"=>0));     
 
     }
+
+    public function historico(){
+        if(\Auth::user()->tipo == 'vendedor'){
+            $pedidos = Pedido::where('vendedor_id', \Auth::user()->id)->get();
+
+        }else{
+            $pedidos = Pedido::where('comprador_id', \Auth::user()->id)->get();
+        }
+
+
+        return view('page.privada.historico.index', compact('pedidos'));
+    }
 }
