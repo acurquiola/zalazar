@@ -13,8 +13,8 @@
 					<li class="bold"><a class="collapsible-header waves-effect waves-grey {{ (\Request::is('adm/home/*'))?"seccion-activa":"" }}" tabindex="0"  ><i class="material-icons">home</i>Home</a>
 						<div class="collapsible-body" {{ (\Request::is('adm/home/*'))?"style=display:block;":"" }}>
 							<ul>
-								<li><a href="#"><i class="material-icons">navigate_next</i>Información</a></li>
-								<li><a href=""><i class="material-icons">navigate_next</i>Productos Destacados</a></li>
+								<li><a href="{{ action('HomeController@indexInformacion') }}"><i class="material-icons">navigate_next</i>Información de Empresa</a></li>
+								<li><a href="{{ action('DestacadoController@index') }}"><i class="material-icons">navigate_next</i>Ver Destacados</a></li>
 								<li><a href="{{ action('SliderController@create', ['seccion' => 'home']) }}"><i class="material-icons">navigate_next</i>Crear Sliders</a></li>
 								<li><a href="{{ action('SliderController@index', ['seccion' => 'home']) }}"><i class="material-icons">navigate_next</i>Ver Sliders</a></li>
 							</ul>							

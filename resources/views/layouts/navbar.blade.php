@@ -62,15 +62,18 @@
 			<img id="logo" src="{{ asset("images/logos/".$logos->file_image) }}" alt="" class="responsive-img">
 			<a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons" style="color: #3E3F41">menu</i></a>
 		</a>
+				<form method="GET" action="{{action('SeccionHomeController@buscador')}}">
 		<div class="col s12">
 			<div class="col s2">
-				<ul id="nav-mobile" class="right hide-on-med-and-down">
-					<li>
-			          <i style="color: #5C89C5; margin-top: 15%" class="material-icons prefix right">search</i>
-			          <input id="icon_prefix" type="text" class="validate right " style="width: 40%; margin-top: 15%">
-			      	</li>     
-				</ul>
+
+					<ul id="nav-mobile" class="right hide-on-med-and-down">
+						<li>
+				          <i style="color: #5C89C5; margin-top: 15%" class="material-icons prefix right">search</i>
+				          <input id="icon_prefix" name="nombre" type="text" class="validate right " style="width: 40%; margin-top: 15%">
+				      	</li>     
+					</ul>
 			</div>
+				</form>
 
         	@auth
 				@if(\Auth::user()->tipo == 'vendedor' || \Auth::user()->tipo == 'cliente')

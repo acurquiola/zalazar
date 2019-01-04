@@ -144,11 +144,11 @@
 																{{ $p->descripcion }}	
 															</td>
 															<td class="center">
-																{{ $p->precio }}	
+																{{ $p->precio - $p->oferta }}	
 															</td>
 															<td class="center">
-																<input min="1" required class="cantidad" name="cantidad[]" data-id="{{ $p->id }}" style="width: 30px" type="number" value="1">
-																<input id="cantidad-{{$p->id}}" name="cantidad-{{$p->id}}" type="hidden" value="1" >
+																<input min="1" required class="cantidad" name="cantidad[]" data-id="{{ $p->id }}" style="width: 50px" type="number" @if(in_array($p->id, $carrito))  value="{{ array_search($p->id, $carrito) }}" @else value="1" @endif >
+																<input id="cantidad-{{$p->id}}" name="cantidad-{{$p->id}}" type="hidden" @if(in_array($p->id, $carrito))  value="{{ array_search($p->id, $carrito) }}" @else value="1" @endif >
 															</td>
 															<td class="center ">
 																<div @if(in_array($p->id, $carrito)) 
@@ -203,6 +203,10 @@
 			var src = $(this).data("srcimage");
 			$("#bg-imagen").attr("src", src);
 		});
+		$('.slider').slider({
+			height: 400,
+		});
+
 
 
 
@@ -210,18 +214,35 @@
 			var cantidad = $(this).val();
 			var id       = $(this).data('id');
 		    $('#cantidad-'+id).text(cantidad);
+
+			var updateCart  = "{{ action('SeccionPrivadaController@update')}}";
+
+	        $.ajax({
+        		data: {id: id, cantidad: cantidad},
+        		method: 'POST',
+	        	url: updateCart,
+			  	headers: {
+			    	'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+			  	}
+	        })
+	        .always(function(response, status, responseObject){
+	        	console.log(response);
+        		
+	        });
+
+
 		});
 
 		$('.icon-shop').click(function() {
-
+			console.log('1');
 			var id       = $(this).data('id');
 			var c        = $('#cantidad-'+id).val(); 
 			var cantidad = $('#cantidad-'+id).text();
-			console.log(c, cantidad);
 
-			if(cantidad == null || cantidad == '' )
+			if(cantidad == null || cantidad == '')
 				cantidad = c;
-			
+
+
 			var addCart  = "{{ action('SeccionPrivadaController@store')}}";
 
 	        $.ajax({
@@ -254,7 +275,6 @@
 			  	}
 	        })
 	        .always(function(response, status, responseObject){
-	        	console.log(response);
         		if(response['status'] == 0){
 				    $("i", '#cart'+id).toggleClass("fas fa-cart-plus far fa-check-circle");
 				    $('#cart'+id).toggleClass("icon-shop icon-shop-green");

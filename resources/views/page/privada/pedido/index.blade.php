@@ -49,10 +49,10 @@
 							<td >{{$c->name}}</td>
 							<td>{{$c->attributes->get('categoria')}}</td>
 
-							<td class="cantidad-td center" data-descuento="{{ $descuento->monto }}" data-cantidad="{{ $c->quantity }}" data-precio="{{ $c->price }}" data-producto={{ $c->id }}>{{ $c->quantity }}</td>
-							<td class="precio-td center"  >{{$c->price}}</td>
+							<td class="cantidad-td center" data-descuento="{{ $descuento->monto }}" data-cantidad="{{ $c->quantity }}" data-precio="{{ $c->price-$c->attributes->oferta }}" data-producto={{ $c->id }}>{{ $c->quantity }}</td>
+							<td class="precio-td center"  >{{$c->price-$c->attributes->oferta}}</td>
 
-							<td class="monto-total center" id="monto_total-td-{{ $c->id }}">{{ $c->quantity*$c->price }}</td>
+							<td class="monto-total center" id="monto_total-td-{{ $c->id }}">{{ $c->quantity*($c->price-$c->attributes->oferta) }}</td>
 							<td class="center"><a href="#" class="icon-remove" data-id="{{ $c->id }}"><i style="color: #9B9B9B; font-size: 25px;" class="far fa-trash-alt"></i></a></td>
 
 						</tr>
@@ -66,7 +66,7 @@
 
 						<tr style="border: 0 !important" >
 
-							<td colspan="5"><textarea placeholder="Mensaje adicional" style="height: 100px;"></textarea></td>
+							<td colspan="5"><textarea placeholder="Mensaje adicional" name="mensaje"  style="height: 100px;"></textarea></td>
 							<td colspan="3" class="center">Subtotal</td>
 							<td class="center" id="subtotal"></td>
 						</tr>
@@ -140,9 +140,8 @@
 		
     	$('.modal').modal();
 
-		$(document).ready(function(){
-
-			monto_total = [];
+    	function calculo(){
+    		monto_total = [];
 			total       = 0;
 			aux         = 0;
 
@@ -174,6 +173,12 @@
 			$('#total').html('$'+totalTotal);
 			$('#total-input').val(totalTotal);
 
+    	}
+
+		$(document).ready(function(){
+
+		
+			calculo();
 
 			$('.icon-remove').click(function() {
 				var id         = $(this).data('id');			
@@ -190,6 +195,8 @@
 				.always(function(response, status, responseObject){
 					if(response['status'] == 0){
 						$('#item-'+id).remove();
+
+						calculo();
 					}
 				});
 			});

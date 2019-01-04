@@ -2,33 +2,29 @@
 
 				</div>
 
-				<h5>Novedades Destacadas</h5>					
+				<h5>Productos Destacados</h5>					
 				<div class="divider"></div>
 				<table class="index-table-logos responsive-table ">
 					<thead>
 						<tr>
 							<th>Imagen</th>
-							<th>Título</th>
-							<th>Texto</th>
-							<th>Categoría</th>
+							<th>Nombre</th>
 							<th>Orden</th>
 							<th>Opciones</th>
 						</tr>
 					</thead>
 					<tbody>
-						@forelse($novedades as $n)
+						@forelse($destacados as $d)
 							<tr>
-								<td style="width: 200px;"><img src="{{ asset('images/novedades/'.$n->novedad->file_image) }}"></td>
-								<td style="width: 100px;">{{ $n->novedad->titulo }}</td>
-								<td style="width: 250px;">{!! substr($n->novedad->texto, 0, 150) !!} ...</td>
-								<td>{{ $n->novedad->categoria->nombre }}</td>
-								<td>{{ $n->orden }}</td>
+								<td style="width: 200px;"><img src="{{ asset('images/subfamilias/'.$d->subfamilia->file_image) }}"></td>
+								<td style="width: 100px;">{{ $d->subfamilia->nombre }}</td>
+								<td>{{ $d->orden }}</td>
 								<td>
-									<a href=" {{ action('DestacadoController@edit', $n->id)}} " class="btn-floating btn-large waves-effect waves-light orange"><i class="material-icons">autorenew</i></a>								</td>
+									<a href=" {{ action('DestacadoController@edit', $d->id)}} " class="btn-floating btn-large waves-effect waves-light orange"><i class="material-icons">autorenew</i></a>								</td>
 							</tr>
 						@empty
 							<tr>
-								<td colspan="5">No existen registros</td>
+								<td colspan="4">No existen registros</td>
 							</tr>
 						@endforelse
 					</tbody>

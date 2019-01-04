@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Informacion extends Model
 {
     protected $fillable = [
-    	'titulo', 'file_image' 
+    	'titulo1',	'titulo2', 'file_image' 
     ];
+
 }

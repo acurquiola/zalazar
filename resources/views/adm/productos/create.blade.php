@@ -16,10 +16,16 @@
 							<h5>Crear</h5>					
 							<div class="divider"></div>
 
-							<div class="input-field col s12">
+							<div class="input-field col s8">
 								<i class="material-icons prefix">keyboard_arrow_right</i>
 								<input id="icon_prefix" type="text" class="validate" name="descripcion">
 								<label for="icon_prefix">Descripción</label>
+							</div>
+
+							<div class="input-field col s4">
+								<i class="material-icons prefix">keyboard_arrow_right</i>
+								<input id="icon_prefix" type="text" class="validate" name="codigo"  >
+								<label for="icon_prefix">Código</label>
 							</div>
 
 							<div class="input-field col s8">
@@ -33,10 +39,18 @@
 							</div>
 
 
-							<div class="input-field col s4">
-								<i class="material-icons prefix">keyboard_arrow_right</i>
-								<input id="icon_prefix" type="text" class="validate" name="codigo"  >
-								<label for="icon_prefix">Código</label>
+							<div class="input-field col s1 center" >
+							    <p>
+							      <label>
+							        <input type="checkbox" id="check-oferta" value="0" />
+							        <span></span>
+							      </label>
+							    </p>
+							</div>
+
+							<div class="input-field col s2">
+								<input id="icon_prefix" type="text" class="validate oferta-input" name="oferta" disabled="disabled">
+								<label for="icon_prefix">Oferta</label>
 							</div>
 
 
@@ -82,6 +96,18 @@
 		M.AutoInit();
 		$('.collapsible').collapsible();
 		$('select').formSelect();  
+
+
+		$('#check-oferta').click(function(){
+			var value = $(this).val();
+			if(value == '1'){				
+				$(this).val('0');
+				$('.oferta-input').attr('disabled','disabled');
+			}else{
+				$(this).val('1');
+				$('.oferta-input').removeAttr('disabled');
+			}
+		});
 	});
 
 

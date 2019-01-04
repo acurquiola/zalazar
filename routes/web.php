@@ -12,11 +12,16 @@
 */
 
 Route::get('/', 'SeccionHomeController@index');
+Route::get('/search', 'SeccionHomeController@buscador');
 
 Route::get('empresa', 'SeccionEmpresaController@index');
 
+Route::get('ofertas', 'SeccionOfertaController@index');
+
 Route::get('catalogo', 'SeccionCatalogoController@index');
+
 Route::get('listado', 'SeccionPrecioController@index');
+
 Route::get('historial', 'SeccionPrivadaController@historico');
 
 //Sección de Novedades
@@ -71,9 +76,11 @@ Route::prefix('privada')->group(function () {
 	Route::get('/cliente/{id}', 'SeccionPrivadaController@cliente')->name('privada');
 	Route::post('store', 'SeccionPrivadaController@store');
 	Route::post('remove', 'SeccionPrivadaController@remover');
+	Route::post('update', 'SeccionPrivadaController@update');
 
 	Route::get('pedido', 'SeccionPrivadaController@pedido');
 	Route::post('confirmar', 'SeccionPrivadaController@confirmar');
+	Route::post('enviar', 'MailController@enviarMail');
 });
 
 
@@ -91,6 +98,22 @@ Route::prefix('adm')->group(function () {
 	Route::get('admin/edit/{id}', 'AdminController@edit');
 	Route::put('admin/update/{id}', 'AdminController@update');
 	Route::get('admin/eliminar/{id}', 'AdminController@eliminar');
+
+
+// Admin Home
+	Route::prefix('home')->group(function () {
+
+			Route::get('/', 'HomeController@index');
+			
+		// Admin Destacados
+			Route::resource('destacados', 'DestacadoController');
+
+		//Información principal de la empresa
+			Route::get('/informacion/ver', 'HomeController@indexInformacion');
+			Route::get('/informacion/{id}', 'HomeController@editInformacion');
+			Route::put('/informacion/{id}', 'HomeController@updateInformacion');
+
+	});
 
 	
 	//Ruta para la gestión de logos

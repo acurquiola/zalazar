@@ -1,6 +1,6 @@
-@include('layouts.adm.app')
-@include('layouts.adm.navbar')
-@include('layouts.adm.sidebar')
+@include('adm.layouts.app')
+@include('adm.layouts.navbar')
+@include('adm.layouts.sidebar')
 
 
 <main>

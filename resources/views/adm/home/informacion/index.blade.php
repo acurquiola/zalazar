@@ -6,42 +6,28 @@
 				<div class="divider"></div>
 				<table class="index-table responsive-table ">
 					<tbody>
-						<tr>
-							<td><b>Título</b></td>
-							<td>{{ $textos->home_titulo }}</td>
-							<td rowspan="3"><a href=" {{ action('HomeController@editTexto', $textos->id)}} " class="btn-floating btn-large waves-effect waves-light orange"><i class="fas fa-pencil-alt"></i></a>
-						</tr>
-						<tr>
-							<td><b>Subtítulo</b></td>
-							<td>{{ $textos->home_subtitulo }}</td>								
-						</tr>
-					</tbody>
-				</table>
-				<table class="index-table responsive-table ">
-					<thead>
-						<tr>
-							<th>Imagen</th>
-							<th>Nombre</th>
-							<th>Orden</th>
-							<th>Opciones</th>
-
-						</tr>
-					</thead>
-					<tbody>
-						@if($informacions->count()>0)
-							@foreach($informacions as $i)
+						@if($informacion)
 							<tr>
-								<td><img src="{{ asset('images/home/'.$i->file_image) }}"></td>
-								<td>{{ $i->nombre }}</td>
-								<td>{{ $i->orden }}</td>
-								<td><a href=" {{ action('HomeController@edit', $i->id)}} " class="btn-floating btn-large waves-effect waves-light orange"><i class="fas fa-pencil-alt"></i></a>
+								<td><b>Título 1</b></td>
+								<td>{!! $informacion->titulo1 !!}</td>
+							</tr>
+							<tr>
+								<td><b>Título 2</b></td>
+								<td>{!! $informacion->titulo2 !!}</td>
+							</tr>
+							<tr>
+								<td><b>Imagen</b></td>
+								<td><img src="{{ asset('images/home/'.$informacion->file_image) }}"></td>
+							</tr>
+							<tr>
+								<td colspan="2">
+									<a href=" {{ action('HomeController@editInformacion', $informacion->id)}} " class="btn-floating btn-large waves-effect waves-light orange right"><i class="fas fa-pencil-alt"></i></a>
 								</td>
 							</tr>
-							@endforeach
 						@else
-						<tr>
-							<td colspan="4">No existen registros</td>
-						</tr>
+							<tr>
+								<td colspan="4">No existen registros</td>
+							</tr>
 						@endif
 					</tbody>
 				</table>
@@ -56,7 +42,7 @@
 
 
 
-@include('adm.layouts.script')
+@include('layouts.script')
 
 
 

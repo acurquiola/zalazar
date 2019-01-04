@@ -8,7 +8,7 @@
 				<div class="divider"></div>
 				<div class="col s12">
 
-					<form method="POST"  enctype="multipart/form-data" action="{{action('HomeController@update', $informacion->id)}}" class="col s12 m8 offset-m2 xl10 offset-xl1">
+					<form method="POST"  enctype="multipart/form-data" action="{{action('HomeController@updateInformacion', $informacion->id)}}" class="col s12 m8 offset-m2 xl10 offset-xl1">
 						{{ csrf_field() }}    
 						{{ method_field('PUT')}}  
 
@@ -29,11 +29,16 @@
 							</div>
 							
 							<div class="row">
-							<div class="input-field col s6">
-								<i class="material-icons prefix">keyboard_arrow_right</i>
-								<input id="icon_prefix" type="text" class="validate" name="nombre"  readonly value="{{$informacion->nombre}}" >
-								<label for="icon_prefix">Nombre</label>
-							</div>
+								<div class="input-field col s6">
+									<i class="material-icons prefix">keyboard_arrow_right</i>
+									<input id="icon_prefix" type="text" class="validate" name="titulo1"  readonly value="{{$informacion->titulo1}}" >
+									<label for="icon_prefix">Título 1</label>
+								</div>
+								<div class="input-field col s6">
+									<i class="material-icons prefix">keyboard_arrow_right</i>
+									<input id="icon_prefix" type="text" class="validate" name="titulo2"  readonly value="{{$informacion->titulo2}}" >
+									<label for="icon_prefix">Título 2</label>
+								</div>
 							</div>
 
 							<div class="right">

@@ -26,7 +26,8 @@
 								<label for="icon_prefix">Código</label>
 							</div>
 
-							<div class="input-field col s5">
+							<div class="input-field col s8">
+								<i class="material-icons prefix">keyboard_arrow_right</i>
 								<select class="materialSelect" id="familia" name="familia_id" required>
 									<option>-- Selecciona Familia --</option>
 									@foreach ($familias as $f )
@@ -35,7 +36,22 @@
 								</select>
 							</div>
 
-							<div class="input-field col s5">
+							<div class="input-field col s1 center" >
+							    <p>
+							      <label>
+							        <input type="checkbox" id="check-oferta" value="{{ ($producto->oferta > 0)?'1':'0' }}" checked="{{ ($producto->oferta > 0)?'checked':'' }}"/>
+							        <span></span>
+							      </label>
+							    </p>
+							</div>
+
+							<div class="input-field col s2">
+								<input id="icon_prefix" type="text" class="validate oferta-input" name="oferta" value="{{$producto->oferta}}" >
+								<label for="icon_prefix">Oferta</label>
+							</div>
+
+							<div class="input-field col s8">
+								<i class="material-icons prefix">keyboard_arrow_right</i>
 								<select class="materialSelect" id="subfamilia" name="subfamilia_id">
 								<option>-- Selecciona Subfamilia --</option>
 									@foreach ($subfamilias as $s )
@@ -44,11 +60,13 @@
 								</select>
 							</div>
 
-							<div class="input-field col s2">
+							<div class="input-field col s4">
 								<i class="material-icons prefix">keyboard_arrow_right</i>
-								<input id="icon_prefix" type="text" class="validate" name="orden"   value="{{$producto->orden}}" >
+								<input id="icon_prefix" type="text" class="validate" name="orden" value="{{$producto->orden}}" >
 								<label for="icon_prefix">Orden</label>
 							</div>
+
+
 
 						</div>
 						<div class="row">
@@ -73,10 +91,22 @@
 
 <script>
 
+
 	$(document).ready(function(){		
 		M.AutoInit();
 		$('.collapsible').collapsible();
 		$('select').formSelect();  
+
+		$('#check-oferta').click(function(){
+			var value = $(this).val();
+			if(value == '1'){				
+				$(this).val('0');
+				$('.oferta-input').attr('disabled','disabled');
+			}else{
+				$(this).val('1');
+				$('.oferta-input').removeAttr('disabled');
+			}
+		});
 	});
 	
 

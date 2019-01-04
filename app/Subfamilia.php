@@ -24,4 +24,9 @@ class Subfamilia extends Model
     {
         return $this->hasMany('App\Galeria');
     }
+
+    public function destacado()
+    {
+        return $this->hasOne('App\Destacado');
+    }
 }

@@ -66,15 +66,12 @@ class SeccionProductoController extends Controller
 		$productos_sf 	 	   = Subfamilia::where('familia_id', $subfamilia->familia_id)->get();
 
         $cart = (\Cart::getContent());
-
         $carrito = array();
 
         foreach ($cart as $c) {
-        	$carrito[] = $c->id;
-        	
+        	$carrito[$c->quantity] = $c->id;        	
         }
-        
-	    return view('page.productos.showProducto', compact('carrito', 'productos_sf', 'familias', 'seccion', 'metadato', 'familia', 'productos', 'activo', 'subfamilias','subfamilia', 'subfamilias_productos', 'producto'));
+	    return view('page.productos.showProducto', compact('cart', 'carrito', 'productos_sf', 'familias', 'seccion', 'metadato', 'familia', 'productos', 'activo', 'subfamilias','subfamilia', 'subfamilias_productos', 'producto'));
 	}
 
 }

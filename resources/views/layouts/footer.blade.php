@@ -15,12 +15,12 @@
 							<a href=" {{ url('/')}} " >INICIO</a>
 						</div>
 						<div class="col s12 m6">
-							<a href=" {{ url('/novedades')}} " >CATÁLOGO</a>
+							<a href=" {{ url('catalogo')}} " >CATÁLOGO</a>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col s12 m6">
-						<a href=" {{ url('/productos')}} " >EMPRESA</a>
+						<a href=" {{ url('empresa')}} " >EMPRESA</a>
 						</div>
 						<div class="col s12 m6">
 							<a href=" {{ url('/novedades')}} " >NOVEDADES</a>
@@ -31,7 +31,7 @@
 						<a href=" {{ url('/productos')}} " >PRODUCTOS</a>
 						</div>
 						<div class="col s12 m6">
-							<a href=" {{ url('/novedades')}} " >CONTACTO</a>
+							<a href=" {{ url('contacto')}} " >CONTACTO</a>
 						</div>
 					</div>
 				</div>

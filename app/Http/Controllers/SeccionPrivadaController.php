@@ -10,9 +10,10 @@ use App\Subfamilia;
 use App\Descuento;
 use App\Pedido;
 use App\User;
+use App\Dato;
 use Darryldecode\Cart\Facades\CartFacade;
 use Session;
-
+use Mail;
 
 class SeccionPrivadaController extends Controller
 {
@@ -48,6 +49,7 @@ class SeccionPrivadaController extends Controller
                 'image'     => $producto->subfamilia->file_image,
                 'codigo'    => $producto->codigo,
                 'categoria' => $producto->subfamilia->nombre,
+                'oferta'    => $producto->oferta,
             )
         ));
 
@@ -102,7 +104,7 @@ class SeccionPrivadaController extends Controller
             $vendedor  = User::find('1');
         }
         
-        $pedido    = Pedido::where('comprador_id', $comprador->id)->where('status', 0)->first();
+        $pedido = Pedido::where('comprador_id', $comprador->id)->where('status', 0)->first();
 
         if(!$pedido){
             $pedido               = New Pedido;
@@ -120,9 +122,26 @@ class SeccionPrivadaController extends Controller
             $pedidos =  \DB::table('pedido_producto')->insert(
                  ['producto_id' => $producto_id->id, 
                  'pedido_id'    => $pedido->id,
-                 'cantidad' => $c->quantity]
+                 'cantidad'     => $c->quantity]
             );
-        }       
+        }
+
+
+        $pedidos = $pedido->articulos;
+
+        $data = array(['cliente'  => $comprador->name,
+                       'pedido'   => $pedido->id,
+                       'articulos'=> $pedidos,
+                       'vendedor' => $vendedor,
+                       'monto'    => $pedido->monto_total,
+                       'mensaje'  => $request->get('mensaje')]);
+        Mail::send('page.privada.pedido.email.pedido', $data[0], function($message){
+                $dato = Dato::where('tipo', 'email')->first();
+                $message->subject('Has recibido un pedido');
+                $message->to($dato->descripcion);
+            }
+        );
+
 
         \Cart::clear();
         $request->session()->forget('cliente_id');
@@ -141,5 +160,24 @@ class SeccionPrivadaController extends Controller
 
 
         return view('page.privada.historico.index', compact('pedidos'));
+    }
+
+    public function update(Request $request){
+
+        $cantidad        = $request->cantidad;
+        $cart            = \Cart::get($request->id);
+        $cantidad_actual = $cart->quantity;
+
+        $diferencia = $cantidad - $cantidad_actual;
+
+        \Cart::update($request->id, array(
+            'quantity' => $diferencia, 
+        ));
+
+        if($request->cantidad == '0'){
+            $this->remover($request);
+        }
+
+        return response()->json(array("text"=>'Done!',"status"=>0));     
     }
 }

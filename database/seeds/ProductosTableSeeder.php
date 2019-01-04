@@ -20,6 +20,7 @@ class ProductosTableSeeder extends Seeder
 				'orden'         => 'aa',
 				'presentacion'  => '100',
 				'precio'        => '250',
+				'oferta'		=> '50',
 				'familia_id'    => 5,
 				'subfamilia_id' => 5,
 
@@ -32,6 +33,7 @@ class ProductosTableSeeder extends Seeder
 				'orden'         => 'aa',
 				'presentacion'  => '100',
 				'precio'        => '250',
+				'oferta'		=> '20',
 				'familia_id'    => 5,
 				'subfamilia_id' => 5,
 
@@ -44,6 +46,7 @@ class ProductosTableSeeder extends Seeder
 				'orden'         => 'aa',
 				'presentacion'  => '100',
 				'precio'        => '250',
+				'oferta'		=> '0',
 				'familia_id'    => 5,
 				'subfamilia_id' => 5,
 
@@ -56,6 +59,7 @@ class ProductosTableSeeder extends Seeder
 				'orden'         => 'aa',
 				'presentacion'  => '100',
 				'precio'        => '250',
+				'oferta'		=> '0',
 				'familia_id'    => 5,
 				'subfamilia_id' => 5,
 

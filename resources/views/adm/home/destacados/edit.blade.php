@@ -2,11 +2,11 @@
 					<a class="breadcrumb">Editar</a>
 				</div>
 
-				<h5>Seleccionar Novedades</h5>					
+				<h5>Seleccionar Destacados</h5>					
 				<div class="divider"></div>
 				<div class="col s12">
 
-					<form method="POST"  enctype="multipart/form-data" action="{{action('DestacadoController@update', $novedad->id)}}" class="col s12 m8 offset-m2 xl10 offset-xl1">
+					<form method="POST"  enctype="multipart/form-data" action="{{action('DestacadoController@update', $destacado->id)}}" class="col s12 m8 offset-m2 xl10 offset-xl1">
 						{{ csrf_field() }}    
 						{{ method_field('PUT')}}  
 
@@ -16,16 +16,16 @@
 
 
 								<div class="input-field col s10">
-									<select name="novedad_id">
-										@foreach ($novedades as $n )
-										<option value="{{ $n->id }}" data-icon="{{ asset('images/novedades/'.$n->file_image) }}" class="left" @if($n->id == $novedad->id) selected @endif >{{ ucwords($n->titulo) }} </option>
+									<select name="subfamilia_id">
+										@foreach ($destacados as $d )
+										<option value="{{ $d->id }}" data-icon="{{ asset('images/subfamilias/'.$d->file_image) }}" class="left" @if($d->id == $destacado->id) selected @endif >{{ ucwords($d->nombre) }} </option>
 										@endforeach
 									</select>
 								</div>
 								
 								<div class="input-field col s2">
 									<i class="material-icons prefix">keyboard_arrow_right</i>
-									<input id="icon_prefix" type="text" class="validate" name="orden"  value="{{$novedad->orden}}" >
+									<input id="icon_prefix" type="text" class="validate" name="orden"  value="{{$destacado->orden}}" >
 									<label for="icon_prefix">Orden</label>
 								</div>
 

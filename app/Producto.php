@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Producto extends Model
 {
     protected $fillable = [
-        'orden', 'descripcion', 'codigo', 'presentacion', 'precio', 'familia_id', 'subfamilia_id'
+        'orden', 'descripcion', 'codigo', 'presentacion', 'precio', 'familia_id', 'subfamilia_id', 'oferta'
     ];
 
     public function familia()

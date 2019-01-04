@@ -20,6 +20,7 @@ class CreateProductosTable extends Migration
             $table->string('orden')->nullable();
             $table->string('presentacion')->nullable();
             $table->string('precio')->nullable();
+            $table->string('oferta')->default('0');
             $table->unsignedInteger('familia_id');
             $table->foreign('familia_id')->references('id')->on('familias')->onDelete('cascade');    
             $table->unsignedInteger('subfamilia_id');
