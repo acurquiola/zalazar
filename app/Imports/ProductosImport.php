@@ -19,20 +19,46 @@ class ProductosImport implements ToModel
         /*Validar que sea el final del archivo*/
         if($row[0] != null && $row[1] != null && $row[2] != null &&  $row[3] != null &&  $row[4] != null &&  $row[5] != null ){
 
-            $familia      = trim($row[0]);
-            $subfamilia   = trim($row[1]);
-            $codigo       = trim($row[2]);
+            $codigo       = trim($row[0]);
+            $familia      = trim($row[1]);
+            $subfamilia   = trim($row[2]);
             $descripcion  = trim($row[3]);
             $presentacion = trim($row[4]);
             $precio       = trim($row[5]);
 
-            if($familia != "Familia" && $subfamilia != "Categoria" && $codigo != "Codigo" && $descripcion != 'Denominacion' && $presentacion != 'Presentacion' && $precio != 'Precio'){
+            if($familia != "Familia" && $subfamilia != "Subfamilia" && $codigo != "Código" && $descripcion != 'Denominación' && $presentacion != 'Presentación' && $precio != 'Precio'){
                 $producto = Producto::where('codigo', $codigo)->first();
+
+                $f  = Familia::where('nombre', 'like', $familia)->first();
+                $sf = Subfamilia::where('nombre', 'like', $subfamilia)->first();
+
+                if($f == null ){
+                    $familia_new         = new Familia; 
+                    $familia_new->nombre = $familia;
+                    $familia_new->save();
+
+                    if($sf == null ){
+                        $subfamilia_new             = new Subfamilia; 
+                        $subfamilia_new->nombre     = $subfamilia;
+                        $subfamilia_new->familia_id = $familia_new->id;
+                        $subfamilia_new->save();
+                    }
+                }else{                
+                    if($sf == null ){
+                        $subfamilia_new             = new Subfamilia; 
+                        $subfamilia_new->nombre     = $subfamilia;
+                        $subfamilia_new->familia_id = $f->id;
+                        $subfamilia_new->save();
+                    }
+                }
+
+
                 if(!$producto){
                     $f = Familia::where('nombre', 'like', $familia)->first();
                     $s = Subfamilia::where('nombre', 'like', $subfamilia)->first();
-                    $familia_id    = $f->id;
-                    $subfamilia_id = $s->id;
+
+                    $familia_id    = ($f != null)?$f->id:1;
+                    $subfamilia_id = ($s != null)?$s->id:1;
 
                     return new Producto([
                         'codigo'        => $codigo,
