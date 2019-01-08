@@ -76,6 +76,7 @@ class SeccionPrivadaController extends Controller
         if($tipo == 'vendedor'){
             if(Session::has('cliente_id')){
                 $userId = Session::get('cliente_id');
+                $cliente = User::find($userId);
                 $cart   = (\Cart::getContent()->count() > 0)?\Cart::getContent():'';
             }
             else
@@ -88,7 +89,7 @@ class SeccionPrivadaController extends Controller
             $cart   = (\Cart::getContent()->count() > 0)?\Cart::getContent():'';
         }
 
-        return view('page.privada.pedido.index', compact('cart', 'descuento'));
+        return view('page.privada.pedido.index', compact('cart', 'descuento', 'cliente'));
     }
 
     public function confirmar(Request $request){

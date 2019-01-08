@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Descuento;
 
 class UserController extends Controller
 {
@@ -26,7 +27,13 @@ class UserController extends Controller
     public function create($tipo)
     {
         $tipos = ['vendedor' => 'Vendedor', 'cliente' => 'Cliente'];
-        return view('adm.usuarios.create' , compact('tipo', 'tipos'));
+
+        if($tipo == 'cliente'){
+            $vendedores = User::where('tipo', 'vendedor')->get();
+            $descuentos = Descuento::all();
+        }
+        
+        return view('adm.usuarios.create' , compact('tipo', 'tipos', 'vendedores', 'descuentos'));
     }
 
     public function store(Request $request)
@@ -35,7 +42,9 @@ class UserController extends Controller
         $user = new User ($request->all());
         $user->password = bcrypt($request->password);
         
-        $user->tipo     = $request->tipo;
+        $user->tipo         = $request->tipo;
+        $user->parent_id    = $request->parent_id;
+        $user->descuento_id = $request->descuento_id;
 
         if($user->save())
              return redirect()->back()->with('alert', "Usuario registrado exitósamente" );
@@ -46,15 +55,23 @@ class UserController extends Controller
     public function edit($tipo, $id){
         $user = User::find($id);
         $tipo = ['vendedor' => 'Vendedor', 'cliente' => 'Cliente'];
-        return view('adm.usuarios.edit', ['user' => $user, 'tipo' => $tipo]);
+
+        if($user->tipo == 'cliente'){
+            $vendedores = User::where('tipo', 'vendedor')->get();
+            $descuentos = Descuento::all();
+        }
+        
+        return view('adm.usuarios.edit', ['user' => $user, 'tipo' => $tipo, 'vendedores' => $vendedores, 'descuentos' => $descuentos]);
     }
 
     public function update(Request $request, $tipo, $id){
         $user  = User::find($id);
         $user->fill($request->all());
 
-        $user->tipo     = $request->tipo;
-        $user->password = bcrypt($request->password);
+        $user->tipo         = $request->tipo;
+        $user->parent_id    = $request->parent_id;
+        $user->descuento_id = $request->descuento_id;
+        $user->password     = bcrypt($request->password);
 
         if($user->save())
             return redirect()->back()->with('alert', "Usuario actualizado exitósamente" );

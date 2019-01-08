@@ -12,16 +12,16 @@
 						{{ method_field('PUT')}}  
 
 						<div class="row">
-							<div class="input-field col s6">
-								<i class="material-icons prefix">keyboard_arrow_right</i>
-								<input id="icon_prefix" type="text" class="validate" name="username" readonly value="{{$user->username}}" >
-								<label for="icon_prefix">Username</label>
-							</div>
 
 							<div class="input-field col s6">
 								<i class="material-icons prefix">keyboard_arrow_right</i>
 								<input id="icon_prefix" type="text" class="validate" name="name" value="{{$user->name}}" >
 								<label for="icon_prefix">Nombre</label>
+							</div>
+							<div class="input-field col s6">
+								<i class="material-icons prefix">keyboard_arrow_right</i>
+								<input id="icon_prefix" type="text" class="validate" name="username" readonly value="{{$user->username}}" >
+								<label for="icon_prefix">Usuario</label>
 							</div>
 							<div class="input-field col s6">
 								<i class="material-icons prefix">keyboard_arrow_right</i>
@@ -32,16 +32,42 @@
 								<i class="material-icons prefix">keyboard_arrow_right</i>
 								<input id="icon_prefix" type="password" class="validate" name="password"   >
 								<label for="icon_prefix">Contraseña</label>
-							</div>							
-
-							<div class="input-field col s6">
-								<i class="material-icons prefix">keyboard_arrow_right</i>
-								<select name="tipo">
-									@foreach ($tipo as $i => $t)
-										<option value="{{ $i }}" @if($user->tipo == $i)  selected @endif > {{ ucwords($t) }}</option>
-									@endforeach
-								</select>
 							</div>
+
+							@if($user->tipo == 'cliente')		
+								<div class="input-field col s6">
+									<i class="material-icons prefix">keyboard_arrow_right</i>
+									<select name="parent_id">
+										@foreach ($vendedores as $v)
+											<option value="{{ $v->id }}" @if($user->parent_id == $v->id)  selected @endif > {{ ucwords($v->name) }}</option>
+										@endforeach
+									</select>
+
+									<label for="icon_prefix">Vendedor Asignado</label>
+								</div>	
+								<div class="input-field col s6">
+									<i class="material-icons prefix">keyboard_arrow_right</i>
+									<select name="descuento_id">
+										@foreach ($descuentos as $d)
+											<option value="{{ $d->id }}" @if($user->descuento_id == $d->id)  selected @endif > {{ ucwords($d->tipo) }}</option>
+										@endforeach
+									</select>
+
+									<label for="icon_prefix">Descuento Asignado</label>
+								</div>	
+
+								<input type="hidden" name="tipo" value="cliente">			
+							@endif
+
+
+							@if($user->tipo == 'vendedor')	
+								<input type="hidden" name="tipo" value="vendedor">			
+								<input type="hidden" name="descuento_id" value="1">			
+								<input type="hidden" name="parent_id" value="1">			
+							@endif
+
+
+
 						</div>
 						<div class="row">
 							<div class="right">

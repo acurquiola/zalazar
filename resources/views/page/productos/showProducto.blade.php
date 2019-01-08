@@ -170,6 +170,20 @@
 														</tr>
 													@endforeach
 												</tbody>
+
+												<tfoot>													
+													<tr >
+														<td colspan="3"></td>
+														<td >
+															<a href="{{ action('SeccionProductoController@index') }}" class=" z-depth-0 btn button-continuar-compra center-align" id="estandar-otro-btn">CONTINUAR PEDIDO</a>					
+														</td>
+
+														<td >
+															<a id="estandar-btn" class="btn center-align z-depth-0 confirmar-pedido " href="{{ url('/privada/pedido') }}">CONFIRMAR PEDIDO</a>	
+														</td>
+
+													</tr>
+												</tfoot>
 											</table>
 
 										</div>

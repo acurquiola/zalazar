@@ -97,12 +97,12 @@ return [
         'users' => [
             'provider' => 'users',
             'table' => 'password_resets',
-            'expire' => 200,
+            'expire' => 200000,
         ],
         'admins' => [
             'provider' => 'admins',
             'table' => 'password_resets',
-            'expire' => 200,
+            'expire' => 200000,
         ],
     ],
 ];

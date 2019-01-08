@@ -15,10 +15,9 @@
 
 		<center>
 			<div class='row' style="padding-top: 20px; ">
-				<button style="background-color: #3241C4; border: 1px solid #3241C4;color:#FFFFFF ; width: 165px; height: 45px" id="btn-login" type='submit' name='btn_login' >ENVIAR</button>
+				<button style="background-color: #425E89; border: 1px solid #425E89;color:#FFFFFF ; width: 165px; height: 45px" id="btn-login" type='submit' name='btn_login' >ENVIAR</button>
 			</div>
 		</center>
-		<a id="login-password" href="{{ route('password.request') }}"><h6 class="center" for="">Olvidé mi contraseña </h6></a>
 
 	</form>
 	<div class="divider"></div>
@@ -58,7 +57,7 @@
 		</div>
 	</div>
 	<div class="nav-content">
-		<a href="{{ url('/') }}" class="brand-logo">
+		<a  @auth('web') href="{{ url('productos') }}" @else href="{{ url('/') }}"  @endauth  class="brand-logo">
 			<img id="logo" src="{{ asset("images/logos/".$logos->file_image) }}" alt="" class="responsive-img">
 			<a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons" style="color: #3E3F41">menu</i></a>
 		</a>

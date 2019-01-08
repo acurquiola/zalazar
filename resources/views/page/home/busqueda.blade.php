@@ -26,8 +26,10 @@
 								</div>
 								<div class="card-content" id="image-subfamilias-card-content" style="height: 50px;" >
 									<span class="card-title center" id="image-subfamilias-card-content-title">{{ $s->descripcion }}</span>
-									<span class="card-title left precio-anterior" id="image-subfamilias-card-content-title">${{ $s->precio }}</span>
-									<span class="card-title right precio-actual" id="image-subfamilias-card-content-title">${{ $s->precio - $s->oferta }}</span>
+									@auth('web')
+										<span class="card-title left precio-anterior" id="image-subfamilias-card-content-title">${{ $s->precio }}</span>
+										<span class="card-title right precio-actual" id="image-subfamilias-card-content-title">${{ $s->precio - $s->oferta }}</span>
+									@endauth
 								</div>
 							</div>
 						</div>

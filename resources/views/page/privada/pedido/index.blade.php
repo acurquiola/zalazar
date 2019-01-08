@@ -49,7 +49,7 @@
 							<td >{{$c->name}}</td>
 							<td>{{$c->attributes->get('categoria')}}</td>
 
-							<td class="cantidad-td center" data-descuento="{{ $descuento->monto }}" data-cantidad="{{ $c->quantity }}" data-precio="{{ $c->price-$c->attributes->oferta }}" data-producto={{ $c->id }}>{{ $c->quantity }}</td>
+							<td class="cantidad-td center" data-descuento="{{(\Auth::user()->tipo == 'cliente')?$user->descuento->monto:$cliente->descuento->monto }}" data-cantidad="{{ $c->quantity }}" data-precio="{{ $c->price-$c->attributes->oferta }}" data-producto={{ $c->id }}>{{ $c->quantity }}</td>
 							<td class="precio-td center"  >{{$c->price-$c->attributes->oferta}}</td>
 
 							<td class="monto-total center" id="monto_total-td-{{ $c->id }}">{{ $c->quantity*($c->price-$c->attributes->oferta) }}</td>
@@ -75,7 +75,7 @@
 
 							<td colspan="5"></td>
 							<td colspan="3" class="center">Descuento</td>
-							<td class="center" data-descuento="{{ $descuento->monto }}"  id="descuento"></td>
+							<td class="center" data-descuento="{{(\Auth::user()->tipo == 'cliente')?$user->descuento->monto:$cliente->descuento->monto }}"  id="descuento"></td>
 						</tr>
 
 						<tr style="border: 0 !important">
@@ -99,7 +99,7 @@
 							</td>
 
 							<td >
-								<a id="estandar-btn" class="btn center-align z-depth-0 confirmar-pedido ">REALIZAR PEDIDO</a>	
+								<a id="estandar-btn" class="btn center-align z-depth-0 confirmar-pedido ">CONFIRMAR PEDIDO</a>	
 							</td>
 
 						</tr>

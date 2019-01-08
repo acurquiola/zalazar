@@ -9,10 +9,10 @@
 		<div class="row" id="familias-row">
 			
 			@forelse($familias as $f)
-				<div class="col s12 m12 l4">
-					<div class="familia-productos">
+				<div class="col s12 m12 l3">
+					<div class="subfamilia-productos">
 				        <div class="efecto">
-							<a href="{{ action('SeccionProductoController@show', $f->id) }}"><img src="{{ asset('images/familias/hover-familias.png') }}" class="responsive-img" style="width: 100%">	    </a>                
+							<a href="{{ action('SeccionProductoController@show', $f->id) }}"><img src="{{ asset('images/subfamilias/hover-subfamilias.png') }}" class="responsive-img" style="width: 100%">	    </a>                
 						</div>
 						<img src="{{ asset('images/familias/'.$f->file_image) }}">
 					</div>
