@@ -43,5 +43,15 @@ class User extends Authenticatable
     {
         return $this->belongsTo('App\Descuento');
     }
+
+    public function descuentos_familias()
+    {
+        return $this->belongsToMany('App\Familia')->withPivot('id', 'user_id', 'familia_id', 'monto');
+    }
+
+    public function descuentos_subfamilias()
+    {
+        return $this->belongsToMany('App\Subfamilia')->withPivot('id', 'user_id', 'subfamilia_id', 'monto');
+    }
     
 }

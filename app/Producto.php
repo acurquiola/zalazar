@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Producto extends Model
 {
     protected $fillable = [
-        'orden', 'descripcion', 'codigo', 'presentacion', 'precio', 'familia_id', 'subfamilia_id', 'oferta'
+        'orden', 'descripcion', 'codigo', 'presentacion', 'file_image', 'precio', 'familia_id', 'subfamilia_id', 'oferta'
     ];
 
     public function familia()
@@ -24,6 +24,4 @@ class Producto extends Model
     {
         return $this->belongsToMany('App\Pedido')->withPivot('id', 'pedido_id', 'producto_id', 'cantidad');
     }
-
-
 }

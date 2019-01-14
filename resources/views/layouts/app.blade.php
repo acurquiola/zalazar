@@ -36,6 +36,9 @@
    
     <link href="{{ asset('icons/fontawesome/css/all.css') }}" rel="stylesheet">
 
+    <link href="{{ asset('alertify/css/alertify.rtl.css') }}" rel="stylesheet">
+    <link href="{{ asset('alertify/css/themes/default.rtl.css') }}" rel="stylesheet">
+    
     <script src='https://www.google.com/recaptcha/api.js'></script>
 
 

@@ -30,7 +30,7 @@
 								<i class="material-icons prefix">keyboard_arrow_right</i>
 								<select name="tipo">
 									@foreach ($tipo as $i => $t)
-										<option value="{{ $i }}" @if($user->tipo == $i)  selected @endif > {{ ucwords($t) }}</option>
+										<option value="{{ $i }}" > {{ ucwords($t) }}</option>
 									@endforeach
 								</select>
 							</div>

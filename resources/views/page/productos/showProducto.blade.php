@@ -104,7 +104,7 @@
 					@auth
 						@if(\Auth::user()->tipo == 'vendedor' || \Auth::user()->tipo == 'cliente')
 
-							<div class="col s12 m12 l3" style="margin-top: 5%">
+							<div class="col s12 m12 l3 subfamilia-productos" style="margin-top: 5%">
 								<img src="{{ asset('images/subfamilias/'.$subfamilia->file_image) }}" alt="">
 							</div>
 
@@ -175,7 +175,7 @@
 													<tr >
 														<td colspan="3"></td>
 														<td >
-															<a href="{{ action('SeccionProductoController@index') }}" class=" z-depth-0 btn button-continuar-compra center-align" id="estandar-otro-btn">CONTINUAR PEDIDO</a>					
+															<a href="{{ action('SeccionProductoController@index') }}" class=" z-depth-0 btn button-continuar-compra center-align" id="estandar-otro-btn">VER PRODUCTOS</a>					
 														</td>
 
 														<td >

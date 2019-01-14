@@ -35,7 +35,9 @@ class SliderController extends Controller
         $file_save ? $datos['file_image'] = $file_save : false;       
         
         $slider->fill($datos);
+        dd($seccion);
         $slider->seccion = $seccion;
+
 
         if($slider->save())
             return redirect()->back()->with('alert', "Registro almacenado exitósamente" );

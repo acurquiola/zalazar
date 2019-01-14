@@ -25,12 +25,12 @@
 					<li class="bold"><a class="collapsible-header waves-effect waves-grey {{ (\Request::is('adm/productos*'))?"seccion-activa":"" }}" tabindex="0" ><i class="material-icons">shopping_cart</i>Productos</a>
 						<div class="collapsible-body"  {{ (\Request::is('adm/productos*'))?"style=display:block;":"" }}>
 							<ul>
-								<li><a href="{{ action('ProductoController@create') }}" ><i class="material-icons">navigate_next</i>Crear Producto</a></li>
-								<li><a href="{{ action('ProductoController@index') }}" ><i class="material-icons">navigate_next</i>Ver Productos</a></li>
-								<li><a href="{{ action('SubfamiliaController@create') }}" ><i class="material-icons">navigate_next</i>Crear Subfamilia</a></li>
-								<li><a href="{{ action('SubfamiliaController@index') }}" ><i class="material-icons">navigate_next</i>Ver Subfamilias</a></li>
 								<li><a href="{{ action('FamiliaController@create') }}" ><i class="material-icons">navigate_next</i>Crear Familia</a></li>
 								<li><a href="{{ action('FamiliaController@index') }}" ><i class="material-icons">navigate_next</i>Ver Familias</a></li>
+								<li><a href="{{ action('SubfamiliaController@create') }}" ><i class="material-icons">navigate_next</i>Crear Subfamilia</a></li>
+								<li><a href="{{ action('SubfamiliaController@index') }}" ><i class="material-icons">navigate_next</i>Ver Subfamilias</a></li>
+								<li><a href="{{ action('ProductoController@create') }}" ><i class="material-icons">navigate_next</i>Crear Producto</a></li>
+								<li><a href="{{ action('ProductoController@index') }}" ><i class="material-icons">navigate_next</i>Ver Productos</a></li>
 							</ul>
 						</div>
 					</li>
@@ -39,8 +39,7 @@
 					<li class="bold"><a class="collapsible-header waves-effect waves-grey {{ (\Request::is('adm/catalogo*'))?"seccion-activa":"" }}" tabindex="0" ><i class="fas fa-file-download"></i>Catálogos</a>
 						<div class="collapsible-body"  {{ (\Request::is('adm/catalogo*'))?"style=display:block;":"" }}>
 							<ul>
-								<li><a href="{{ action('DescargaController@create') }}" ><i class="material-icons">navigate_next</i>Cargar Catálogo</a></li>
-								<li><a href="{{ action('DescargaController@index') }}" ><i class="material-icons">navigate_next</i>Ver Catálogos</a></li>
+								<li><a href="{{ action('CatalogoController@index') }}" ><i class="material-icons">navigate_next</i>Ver Catálogo</a></li>
 							</ul>
 						</div>
 					</li>

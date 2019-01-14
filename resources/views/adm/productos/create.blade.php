@@ -4,7 +4,7 @@
 
 				<h5>Productos</h5>
 				<div class="right">
-					<a href=" {{ action('ProductoController@carga')}} " class="btn waves-effect waves-light orange"><i style="font-size: 15px" class="fas fa-plus-circle"></i>CARGA MASIVA</a>
+					<a href=" {{ action('ProductoController@carga')}} " class="btn waves-effect waves-light orange"><i style="font-size: 15px" class="fas fa-plus-circle"></i>CARGA AUTOMÁTICA</a>
 				</div>							
 				<div class="divider"></div>
 				<div class="col s12">
@@ -24,11 +24,10 @@
 
 							<div class="input-field col s4">
 								<i class="material-icons prefix">keyboard_arrow_right</i>
-								<input id="icon_prefix" type="text" class="validate" name="codigo"  >
-								<label for="icon_prefix">Código</label>
+								<input id="icon_prefix" type="text" class="validate" name="file_image"  >
+								<label for="icon_prefix">Imagen</label>
 							</div>
-
-							<div class="input-field col s8">
+							<div class="input-field col s6">
 								<i class="material-icons prefix">keyboard_arrow_right</i>
 								<select class="materialSelect" id="familia" name="familia_id" required>
 									<option>Familia</option>
@@ -38,6 +37,21 @@
 								</select>
 							</div>
 
+							<div class="input-field col s6">
+								<i class="material-icons prefix">keyboard_arrow_right</i>
+								<select class="materialSelect" id="subfamilia" name="subfamilia_id">
+								<option>Subfamilia</option>
+									@foreach ($subfamilias as $s )
+									<option value="{{ $s->id }}">{{ ucwords($s->nombre) }} </option>
+									@endforeach
+								</select>
+							</div>
+
+							<div class="input-field col s4">
+								<i class="material-icons prefix">keyboard_arrow_right</i>
+								<input id="icon_prefix" type="text" class="validate" name="codigo"  >
+								<label for="icon_prefix">Código</label>
+							</div>
 
 							<div class="input-field col s1 center" >
 							    <p>
@@ -48,21 +62,11 @@
 							    </p>
 							</div>
 
-							<div class="input-field col s2">
+							<div class="input-field col s3">
 								<input id="icon_prefix" type="text" class="validate oferta-input" name="oferta" disabled="disabled">
 								<label for="icon_prefix">Oferta</label>
 							</div>
 
-
-							<div class="input-field col s8">
-								<i class="material-icons prefix">keyboard_arrow_right</i>
-								<select class="materialSelect" id="subfamilia" name="subfamilia_id">
-								<option>Subfamilia</option>
-									@foreach ($subfamilias as $s )
-									<option value="{{ $s->id }}">{{ ucwords($s->nombre) }} </option>
-									@endforeach
-								</select>
-							</div>
 							<div class="input-field col s4">
 								<i class="material-icons prefix">keyboard_arrow_right</i>
 								<input id="icon_prefix" type="text" class="validate" name="orden"  >

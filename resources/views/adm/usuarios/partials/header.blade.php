@@ -28,4 +28,4 @@
 			<div class="col s12">
 				<div class="col s12" id="breadcrumb-admin">
 					<a href="{{ url('adm/home/' )}}" class="breadcrumb">Home</a>
-					<a href="{{ url('adm/usuarios/' )}}" class="breadcrumb">Usuarios</a>
+					<a href="{{ url('adm/usuarios/cliente/index' )}}" class="breadcrumb">Usuarios</a>

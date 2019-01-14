@@ -1,5 +1,5 @@
 		@include('adm.productos.partials.header')
-			<a class="breadcrumb">Carga Masiva </a>
+			<a class="breadcrumb">Carga Automática </a>
 			</div>
 
 			<h5>Productos</h5>					

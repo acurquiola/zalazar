@@ -9,7 +9,7 @@ class DescuentoController extends Controller
 {
     public function index()
     {
-    	$descuentos = Descuento::all();
+    	$descuentos = Descuento::where('id', '>', '1')->get();
     	return view('adm.descuentos.index', compact('descuentos'));
     }
 

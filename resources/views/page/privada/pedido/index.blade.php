@@ -10,7 +10,7 @@
 		<!-- Formulario  -->
 
 
-		<div class="container container-fluid">
+		<div class="container container-fluid" id="pedido-div">
 			@if($cart != '')
 
 			<div class="tabla-pedidos" style="margin-top: 5%">
@@ -50,9 +50,9 @@
 							<td>{{$c->attributes->get('categoria')}}</td>
 
 							<td class="cantidad-td center" data-descuento="{{(\Auth::user()->tipo == 'cliente')?$user->descuento->monto:$cliente->descuento->monto }}" data-cantidad="{{ $c->quantity }}" data-precio="{{ $c->price-$c->attributes->oferta }}" data-producto={{ $c->id }}>{{ $c->quantity }}</td>
-							<td class="precio-td center"  >{{$c->price-$c->attributes->oferta}}</td>
+							<td class="precio-td center"  >${{$c->price-$c->attributes->oferta}}</td>
 
-							<td class="monto-total center" id="monto_total-td-{{ $c->id }}">{{ $c->quantity*($c->price-$c->attributes->oferta) }}</td>
+							<td class="monto-total center" id="monto_total-td-{{ $c->id }}"  data-descuento_total="{{ $descuento }}" data-descuento_sf="{{ ($c->attributes->get('subfamilia_monto') == 0)?0:$c->attributes->get('subfamilia_monto') }}" data-descuento_f="{{ ($c->attributes->get('familia_monto') == 0)?0:$c->attributes->get('familia_monto') }}" data-cantidad="{{  $c->quantity }}" data-precio="{{ $c->price-$c->attributes->oferta }}" ></td>
 							<td class="center"><a href="#" class="icon-remove" data-id="{{ $c->id }}"><i style="color: #9B9B9B; font-size: 25px;" class="far fa-trash-alt"></i></a></td>
 
 						</tr>
@@ -67,22 +67,22 @@
 						<tr style="border: 0 !important" >
 
 							<td colspan="5"><textarea placeholder="Mensaje adicional" name="mensaje"  style="height: 100px;"></textarea></td>
-							<td colspan="3" class="center">Subtotal</td>
-							<td class="center" id="subtotal"></td>
+							<td colspan="3" style="text-align: right">Subtotal</td>
+							<td style="text-align: right" id="subtotal"></td>
 						</tr>
 
 						<tr  style="border: 0 !important"  >
 
 							<td colspan="5"></td>
-							<td colspan="3" class="center">Descuento</td>
-							<td class="center" data-descuento="{{(\Auth::user()->tipo == 'cliente')?$user->descuento->monto:$cliente->descuento->monto }}"  id="descuento"></td>
+							<td colspan="3" style="text-align: right">Descuento</td>
+							<td style="text-align: right" data-descuento="{{ $descuento }}"  id="descuento" ></td>
 						</tr>
 
 						<tr style="border: 0 !important">
 
 							<td colspan="5"></td>
-							<td colspan="3" class="center">Total</td>
-							<td class="center" id="total" style="font-size: 20px;font-weight: 900;"></td>
+							<td colspan="3" style="text-align: right">Total</td>
+							<td id="total" style="font-size: 20px;font-weight: 900; text-align: right"></td>
 							<input type="hidden" id="total-input" name="monto_total">
 						</tr>
 
@@ -141,9 +141,11 @@
     	$('.modal').modal();
 
     	function calculo(){
-    		monto_total = [];
+			monto_total = [];
 			total       = 0;
 			aux         = 0;
+			desc        = 0;
+			totalTotal  = 0;
 
 			$('.orden-table').find('.cantidad-td').each(function(){
 				var cantidad  = ($(this).data('cantidad'));
@@ -160,13 +162,44 @@
 			})
 
 			$('.orden-table').find('.monto-total').each(function(){
-				total = parseFloat(total) + parseFloat($(this).html());
+				var descuento_f     = $(this).data('descuento_f');
+				var descuento_sf    = $(this).data('descuento_sf');
+				var descuento_total = $(this).data('descuento_total');
+				var cantidad        = $(this).data('cantidad');
+				var precio          = $(this).data('precio');
+
+
+				var descuento = 0;
+
+				if(descuento_sf != 0){
+					descuento = descuento_sf;
+				}else{
+					if(descuento_f != 0){
+						descuento = descuento_f;
+					}else{
+						if(descuento_total != '0'){
+							descuento = descuento_total;
+						}
+					}
+				}
+				var monto_total     = cantidad * precio;
+
+				var monto_descuento = (monto_total * descuento)/100;
+				
+				var monto_final     = monto_total - monto_descuento;
+
+				$(this).html('$'+monto_final);
+
+				total = parseFloat(total) + parseFloat(monto_total);
+				desc  = parseFloat(desc) + parseFloat(monto_descuento);
 			})
 
-			var descuento = $('#descuento').data('descuento');
+			//var descuento = $('#descuento').data('descuento');
 
-			var desc  = (descuento*total)/100;
-			var totalTotal = total - ((descuento*total)/100);
+			//var desc  = (descuento*total)/100;
+			//var totalTotal = total - ((descuento*total)/100);
+ 
+			totalTotal = total - desc;
 
 			$('#subtotal').html('$'+total);
 			$('#descuento').html('$'+desc);
@@ -204,6 +237,10 @@
 			$('.confirmar-pedido').click(function() {
 				var monto = $('#total-input').val();
 
+				var overlay= "<div class='overlay'><i class='fa fa-refresh' fa-spin></i></div>";
+
+	    		$('#pedido-div').append(overlay);
+
 
 				var confirmar = "{{ action('SeccionPrivadaController@confirmar')}}";
 
@@ -216,10 +253,28 @@
 					}
 				})
 				.always(function(response, status, responseObject){
-					console.log(response);
-					if(response['status'] == 0){
-						alert('Comprar registrada exitósamente. Nuestro equipo lo contactará.')
-					}
+
+	    			$('#pedido-div .overlay').remove();
+
+					alertify.minimalDialog || alertify.dialog('minimalDialog',function(){
+					    return {
+					        main:function(content){
+					            this.setContent(content); 
+					        },
+					        setup:function(){
+					            return { 
+					              options: {
+					              	title: 'Confirmación de Pedido'
+					              } 
+					            };
+					        },
+					    };
+					});
+
+
+					alertify.minimalDialog("Comprar registrada exitósamente. Nuestro equipo lo contactará."+
+											"<a href='{{ action('SeccionPrivadaController@pedido') }}'> Ver Pedido </a>");
+
 				});
 
 

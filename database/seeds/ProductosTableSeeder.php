@@ -21,6 +21,7 @@ class ProductosTableSeeder extends Seeder
 				'presentacion'  => '100',
 				'precio'        => '250',
 				'oferta'		=> '50',
+				'file_image'    => '504100',
 				'familia_id'    => 5,
 				'subfamilia_id' => 5,
 
@@ -34,6 +35,7 @@ class ProductosTableSeeder extends Seeder
 				'presentacion'  => '100',
 				'precio'        => '250',
 				'oferta'		=> '20',
+				'file_image'    => '',
 				'familia_id'    => 5,
 				'subfamilia_id' => 5,
 
@@ -47,6 +49,7 @@ class ProductosTableSeeder extends Seeder
 				'presentacion'  => '100',
 				'precio'        => '250',
 				'oferta'		=> '0',
+				'file_image'    => '504102',
 				'familia_id'    => 5,
 				'subfamilia_id' => 5,
 
@@ -60,6 +63,7 @@ class ProductosTableSeeder extends Seeder
 				'presentacion'  => '100',
 				'precio'        => '250',
 				'oferta'		=> '0',
+				'file_image'    => '',
 				'familia_id'    => 5,
 				'subfamilia_id' => 5,
 

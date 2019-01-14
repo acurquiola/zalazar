@@ -171,14 +171,8 @@ Route::prefix('adm')->group(function () {
 		Route::put('update/{id}', 'DatoController@update');
 	});
 
-
-    // Admin Catálogo
-	Route::prefix('catalogo')->group(function () {
-	//Descargas de Catálogo
-		Route::resource('/descargas', 'DescargaController');
-		Route::get('delete/{id}', 'DescargaController@eliminar');
-	});
-
+	//Ruta para la gestión de descuentos
+	Route::resource('catalogo', 'CatalogoController');
 
 
     // Admin Listado de PRecios
@@ -225,6 +219,13 @@ Route::prefix('adm')->group(function () {
 		Route::get('{tipo}/edit/{id}', 'UserController@edit');
 		Route::put('{tipo}/update/{id}', 'UserController@update');
 		Route::get('{tipo}/delete/{id}', 'UserController@eliminar');
+
+		Route::get('descuentos/{id}', 'ClienteDescuentoController@index')->name('descuentos.index');
+		Route::get('descuentos/{tipo}/edit/{id}', 'ClienteDescuentoController@edit');
+		Route::put('descuentos/{tipo}/update/{id}', 'ClienteDescuentoController@update');
+		Route::get('descuentos/create/{id}', 'ClienteDescuentoController@create');
+		Route::post('descuentos/', 'ClienteDescuentoController@store');
+		Route::get('delete/{tipo}/{id}/{user}', 'ClienteDescuentoController@eliminar');
 	});
 
 

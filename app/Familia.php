@@ -19,4 +19,9 @@ class Familia extends Model
     {
     	return $this->hasMany('App\Subfamilia');
     }
+
+    public function clientes_descuentos()
+    {
+        return $this->belongsToMany('App\User')->withPivot('id', 'user_id', 'familia_id', 'monto');
+    }
 }

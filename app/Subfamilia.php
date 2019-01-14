@@ -29,4 +29,9 @@ class Subfamilia extends Model
     {
         return $this->hasOne('App\Destacado');
     }
+
+    public function clientes_descuentos()
+    {
+        return $this->belongsToMany('App\User')->withPivot('id', 'user_id', 'subfamilia_id', 'monto');
+    }
 }

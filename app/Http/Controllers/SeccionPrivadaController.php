@@ -38,7 +38,44 @@ class SeccionPrivadaController extends Controller
 
     public function store(Request $request){
 
-        $producto = Producto::find($request->id);
+        $producto               = Producto::find($request->id);
+        $tipo                   = \Auth::user()->tipo;
+        $producto_familia_id    = $producto->familia_id;
+        $producto_subfamilia_id = $producto->subfamilia_id;
+
+        if($tipo == 'vendedor'){
+            if(Session::has('cliente_id')){
+                $userId        = Session::get('cliente_id');
+                $cliente       = User::find($userId);
+
+                $descuentos_f  = $cliente->descuentos_familias;
+                $descuentos_sf = $cliente->descuentos_subfamilias;
+            }
+        }else{
+            $userId        = \Auth::user()->id;
+            $descuentos_f  = \Auth::user()->descuentos_familias();
+            $descuentos_sf = \Auth::user()->descuentos_subfamilias();
+        }
+
+        $desc_familia = $descuentos_f->filter(function($desc_familia) use ($producto_familia_id)
+        {
+            if($desc_familia->pivot->familia_id == $producto_familia_id){
+                $desc_familia = $desc_familia->pivot->familia_id;
+                return $desc_familia;
+            }
+        });
+
+        $desc_familia = $desc_familia->first();
+        
+        $desc_subfamilia = $descuentos_f->filter(function($desc_subfamilia) use ($producto_subfamilia_id)
+        {
+            if($desc_subfamilia->pivot->subfamilia_id == $producto_subfamilia_id){
+                $desc_subfamilia = $desc_subfamilia->pivot->subfamilia_id;
+                return $desc_subfamilia;
+            }
+        });
+
+        $desc_subfamilia = $desc_subfamilia->first();
 
         \Cart::add(array(
             'id'       => $producto->id,
@@ -46,10 +83,12 @@ class SeccionPrivadaController extends Controller
             'price'    => $producto->precio,
             'quantity' => $request->cantidad,
             'attributes' => array(
-                'image'     => $producto->subfamilia->file_image,
-                'codigo'    => $producto->codigo,
-                'categoria' => $producto->subfamilia->nombre,
-                'oferta'    => $producto->oferta,
+                'image'            => $producto->subfamilia->file_image,
+                'codigo'           => $producto->codigo,
+                'categoria'        => $producto->subfamilia->nombre,
+                'oferta'           => $producto->oferta,
+                'subfamilia_monto' => ($desc_subfamilia != null)?$desc_subfamilia->pivot->monto:0,
+                'familia_monto'    => ($desc_familia != null)?$desc_familia->pivot->monto:0,
             )
         ));
 
@@ -70,14 +109,19 @@ class SeccionPrivadaController extends Controller
     }
 
     public function pedido(){
-        $tipo = \Auth::user()->tipo;
+        $tipo      = \Auth::user()->tipo;
         $descuento = Descuento::where('tipo', $tipo)->first();
 
         if($tipo == 'vendedor'){
             if(Session::has('cliente_id')){
-                $userId = Session::get('cliente_id');
-                $cliente = User::find($userId);
-                $cart   = (\Cart::getContent()->count() > 0)?\Cart::getContent():'';
+                $userId        = Session::get('cliente_id');
+                $cliente       = User::find($userId);
+                
+                $descuentos_f  = $cliente->descuentos_familias;
+                $descuentos_sf = $cliente->descuentos_subfamilias;
+                $cart          = (\Cart::getContent()->count() > 0)?\Cart::getContent():'';
+                
+                $descuento     = $cliente->descuento->monto;
             }
             else
             {
@@ -85,11 +129,15 @@ class SeccionPrivadaController extends Controller
                 Session::flush();
             }
         }else{
-            $userId = \Auth::user()->id;
-            $cart   = (\Cart::getContent()->count() > 0)?\Cart::getContent():'';
+            $userId        = \Auth::user()->id;
+            $descuentos_f  = \Auth::user()->descuentos_familias();
+            $descuentos_sf = \Auth::user()->descuentos_subfamilias();
+            $cart          = (\Cart::getContent()->count() > 0)?\Cart::getContent():'';
+                
+            $descuento     = \Auth::user()->descuento->monto;
         }
 
-        return view('page.privada.pedido.index', compact('cart', 'descuento', 'cliente'));
+        return view('page.privada.pedido.index', compact('cart', 'descuento', 'cliente', 'descuentos_f', 'descuentos_sf'));
     }
 
     public function confirmar(Request $request){
@@ -136,7 +184,7 @@ class SeccionPrivadaController extends Controller
                        'vendedor' => $vendedor,
                        'monto'    => $pedido->monto_total,
                        'mensaje'  => $request->get('mensaje')]);
-        Mail::send('page.privada.pedido.email.pedido', $data[0], function($message){
+            Mail::send('page.privada.pedido.email.pedido', $data[0], function($message){
                 $dato = Dato::where('tipo', 'email')->first();
                 $message->subject('Has recibido un pedido');
                 $message->to($dato->descripcion);

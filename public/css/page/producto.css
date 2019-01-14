@@ -10,7 +10,7 @@
 }
 
 .subfamilia-productos{
-    width: 268px;
+    max-width: 100%;
     height: 268px;
     overflow: hidden;
     border: 1px solid #ECECEC;
@@ -217,8 +217,8 @@
 
 
 @supports(object-fit: cover){
-    #subfamilia-productos img{
-        max-width: 268px;
+    .subfamilia-productos img{
+        max-width: 100%;
         object-fit: cover;
         object-position: center center;
     }

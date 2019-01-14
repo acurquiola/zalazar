@@ -19,7 +19,7 @@
 					</div>
 
 					<div class="right">
-						<a href="{{ action('LogoController@index') }}" class="waves-effect waves-light btn btn-color">Cancelar</a>
+						<a href="{{ action('DescuentoController@index') }}" class="waves-effect waves-light btn btn-color">Cancelar</a>
 						<button class="btn waves-effect waves-light btn-color" type="submit" name="action">Submit
 							<i class="material-icons right">send</i>
 						</button>

@@ -20,13 +20,14 @@
 								<label for="icon_prefix">Descripción</label>
 							</div>
 
+
 							<div class="input-field col s4">
 								<i class="material-icons prefix">keyboard_arrow_right</i>
-								<input id="icon_prefix" type="text" class="validate" name="codigo"  value="{{$producto->codigo}}" >
-								<label for="icon_prefix">Código</label>
+								<input id="icon_prefix" type="text" class="validate" name="file_image"  value="{{$producto->file_image}}" >
+								<label for="icon_prefix">Imagen</label>
 							</div>
 
-							<div class="input-field col s8">
+							<div class="input-field col s6">
 								<i class="material-icons prefix">keyboard_arrow_right</i>
 								<select class="materialSelect" id="familia" name="familia_id" required>
 									<option>-- Selecciona Familia --</option>
@@ -34,6 +35,22 @@
 									<option value="{{ $f->id }}" @if($f->id == $producto->familia_id) selected @endif >{{ ucwords($f->nombre) }} </option>
 									@endforeach
 								</select>
+							</div>
+							<div class="input-field col s6">
+								<i class="material-icons prefix">keyboard_arrow_right</i>
+								<select class="materialSelect" id="subfamilia" name="subfamilia_id">
+								<option>-- Selecciona Subfamilia --</option>
+									@foreach ($subfamilias as $s )
+									<option value="{{ $s->id }}" @if($s->id == $producto->subfamilia_id) selected @endif >{{ ucwords($s->nombre) }} </option>
+									@endforeach
+								</select>
+							</div>
+
+
+							<div class="input-field col s4">
+								<i class="material-icons prefix">keyboard_arrow_right</i>
+								<input id="icon_prefix" type="text" class="validate" name="codigo"  value="{{$producto->codigo}}" >
+								<label for="icon_prefix">Código</label>
 							</div>
 
 							<div class="input-field col s1 center" >
@@ -45,20 +62,11 @@
 							    </p>
 							</div>
 
-							<div class="input-field col s2">
+							<div class="input-field col s3">
 								<input id="icon_prefix" type="text" class="validate oferta-input" name="oferta" value="{{$producto->oferta}}" >
 								<label for="icon_prefix">Oferta</label>
 							</div>
 
-							<div class="input-field col s8">
-								<i class="material-icons prefix">keyboard_arrow_right</i>
-								<select class="materialSelect" id="subfamilia" name="subfamilia_id">
-								<option>-- Selecciona Subfamilia --</option>
-									@foreach ($subfamilias as $s )
-									<option value="{{ $s->id }}" @if($s->id == $producto->subfamilia_id) selected @endif >{{ ucwords($s->nombre) }} </option>
-									@endforeach
-								</select>
-							</div>
 
 							<div class="input-field col s4">
 								<i class="material-icons prefix">keyboard_arrow_right</i>

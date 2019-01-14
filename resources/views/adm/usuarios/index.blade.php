@@ -21,8 +21,9 @@
 								<td>{{ $u->name }}</td>
 								<td>{{ $u->email }}</td>
 								<td>
-									<a href=" {{ action('UserController@edit', [ 'id' => $u->id, 'tipo' => $u->tipo])}} " class="btn-floating btn-large waves-effect waves-light orange"><i class="fas fa-pencil-alt"></i></a>
-									<a onclick="return confirm('¿Realmente desea eliminar este registro?')"  href=" {{ action('UserController@eliminar',  ['tipo' => $u->tipo, 'id' => $u->id])}} " class="btn-floating btn-large waves-effect waves-light blue"><i class="fas fa-user-minus"></i></a>
+									<a href=" {{ action('ClienteDescuentoController@index', $u->id)}}" class="btn-floating btn waves-effect waves-light red"><i style="font-size: 15px" class="fas fa-percent"></i></a>
+									<a href=" {{ action('UserController@edit', [ 'id' => $u->id, 'tipo' => $u->tipo])}} " class="btn-floating btn waves-effect waves-light orange"><i  style="font-size: 15px"  class="fas fa-pencil-alt"></i></a>
+									<a onclick="return confirm('¿Realmente desea eliminar este registro?')"  href=" {{ action('UserController@eliminar',  ['tipo' => $u->tipo, 'id' => $u->id])}} " class="btn-floating btn waves-effect waves-light blue"><i style="font-size: 15px"  class="fas fa-user-minus"></i></a>
 								</td>
 							</tr>
 						@empty
