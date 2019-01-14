@@ -7,6 +7,7 @@ use App\Familia;
 use App\Subfamilia;
 use Maatwebsite\Excel\Concerns\ToModel;
 
+
 class ProductosImport implements ToModel
 {
     /**
@@ -17,8 +18,8 @@ class ProductosImport implements ToModel
     public function model(array $row)
     {
         /*Validar que sea el final del archivo*/
-        if($row[0] != null && $row[1] != null && $row[2] != null &&  $row[3] != null &&  $row[4] != null &&  $row[5] != null ){
 
+        if($row[0] != null || $row[1] != null || $row[2] != null ||  $row[3] != null ||  $row[4] != null ||  $row[5] != null ){
             $codigo       = trim($row[0]);
             $familia      = trim($row[1]);
             $subfamilia   = trim($row[2]);
@@ -27,31 +28,42 @@ class ProductosImport implements ToModel
             $precio       = trim($row[5]);
 
             if($familia != "Familia" && $subfamilia != "Subfamilia" && $codigo != "Código" && $descripcion != 'Denominación' && $presentacion != 'Presentación' && $precio != 'Precio'){
+
                 $producto = Producto::where('codigo', $codigo)->first();
 
                 $f  = Familia::where('nombre', 'like', $familia)->first();
-                $sf = Subfamilia::where('nombre', 'like', $subfamilia)->first();
 
-                if($f == null ){
-                    $familia_new         = new Familia; 
-                    $familia_new->nombre = $familia;
-                    $familia_new->save();
+                if($subfamilia != ""){
+                    $sf = Subfamilia::where('nombre', 'like', $subfamilia)->first();
+                    if($f == null ){
+                        $familia_new         = new Familia; 
+                        $familia_new->nombre = $familia;
+                        $familia_new->save();
 
-                    if($sf == null ){
-                        $subfamilia_new             = new Subfamilia; 
-                        $subfamilia_new->nombre     = $subfamilia;
-                        $subfamilia_new->familia_id = $familia_new->id;
-                        $subfamilia_new->save();
+                        if($sf == null ){
+                            $subfamilia_new             = new Subfamilia; 
+                            $subfamilia_new->nombre     = $subfamilia;
+                            $subfamilia_new->familia_id = $familia_new->id;
+                            $subfamilia_new->save();
+                        }
+                    }else{                
+                        if($sf == null ){
+                            $subfamilia_new             = new Subfamilia; 
+                            $subfamilia_new->nombre     = $subfamilia;
+                            $subfamilia_new->familia_id = $f->id;
+                            $subfamilia_new->save();
+                        }
                     }
-                }else{                
-                    if($sf == null ){
-                        $subfamilia_new             = new Subfamilia; 
-                        $subfamilia_new->nombre     = $subfamilia;
-                        $subfamilia_new->familia_id = $f->id;
-                        $subfamilia_new->save();
+                }else{
+                    $subfamilia = 'Ninguna';
+
+                    if($f == null ){
+                        $familia_new         = new Familia; 
+                        $familia_new->nombre = $familia;
+                        $familia_new->save();
                     }
+
                 }
-
 
                 if(!$producto){
                     $f = Familia::where('nombre', 'like', $familia)->first();
@@ -70,22 +82,27 @@ class ProductosImport implements ToModel
                     ]);
                 }else{
 
-                    $familia    = Familia::where('nombre', $row[0])->first();
-                    $subfamilia = Subfamilia::where('nombre', $row[1])->first();
+                    $familia    = Familia::where('nombre', $row[1])->first();
+                    $subfamilia = Subfamilia::where('nombre', $row[2])->first();
+
+
+                    $familia_id    = ($familia != null)?$familia->id:1;
+                    $subfamilia_id = ($subfamilia != null)?$subfamilia->id:1;
+
 
                     $producto->codigo        = $codigo;
                     $producto->descripcion   = $descripcion;
                     $producto->presentacion  = $presentacion;
                     $producto->precio        = $precio;
-                    $producto->familia_id    = $familia->id;
-                    $producto->subfamilia_id = $subfamilia->id;
+                    $producto->familia_id    = $familia_id;
+                    $producto->subfamilia_id = $subfamilia_id;
 
                     return $producto;
 
                 }
             }
         }
-
-      
     }
 }
+
+

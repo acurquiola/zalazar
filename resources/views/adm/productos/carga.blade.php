@@ -22,6 +22,7 @@
 								<div class="file-path-wrapper">
 									<input class="file-path validate" type="text">
 									<span class="helper-text" data-error="wrong" data-success="right">Formato aceptado: .xlxs</span>
+									<span class="helper-text" data-error="wrong" data-success="right" style="color: red; font-weight: bold">Nota: Verificar que no existan filas completamente vacías y que el archivo no contenga más de una hoja.</span>
 								</div>
 							</div>
 						</div>
