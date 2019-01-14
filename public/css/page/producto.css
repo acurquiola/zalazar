@@ -185,6 +185,11 @@
     font-weight: 900;
 }
 
+.image-td img{
+    height: 100px; 
+    width: 100px;
+}
+
 .consulta-td a{
     color: #425E89 !important;
 }

@@ -21,16 +21,19 @@
 							</div>
 
 
-							<div class="input-field col s4">
+							<div class="input-field col s3">
 								<i class="material-icons prefix">keyboard_arrow_right</i>
 								<input id="icon_prefix" type="text" class="validate" name="file_image"  value="{{$producto->file_image}}" >
 								<label for="icon_prefix">Imagen</label>
 							</div>
 
+							<div class="input-field col s1">
+								<label for="icon_prefix">.jpg</label>
+							</div>
+
 							<div class="input-field col s6">
 								<i class="material-icons prefix">keyboard_arrow_right</i>
 								<select class="materialSelect" id="familia" name="familia_id" required>
-									<option>-- Selecciona Familia --</option>
 									@foreach ($familias as $f )
 									<option value="{{ $f->id }}" @if($f->id == $producto->familia_id) selected @endif >{{ ucwords($f->nombre) }} </option>
 									@endforeach
@@ -39,7 +42,6 @@
 							<div class="input-field col s6">
 								<i class="material-icons prefix">keyboard_arrow_right</i>
 								<select class="materialSelect" id="subfamilia" name="subfamilia_id">
-								<option>-- Selecciona Subfamilia --</option>
 									@foreach ($subfamilias as $s )
 									<option value="{{ $s->id }}" @if($s->id == $producto->subfamilia_id) selected @endif >{{ ucwords($s->nombre) }} </option>
 									@endforeach

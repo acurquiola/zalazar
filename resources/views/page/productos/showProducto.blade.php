@@ -63,6 +63,9 @@
 												<thead class="center">
 													<tr>
 														<th class="center">
+															Imagen
+														</th>
+														<th class="center">
 															Código
 														</th>
 														<th>
@@ -76,6 +79,9 @@
 												<tbody>
 													@foreach($subfamilia->productos as $p)
 														<tr>
+															<td class="image-td center" >
+																@if (file_exists(public_path('images/productos/'.$p->file_image.'.jpg')))<img class="materialboxed" src="{{ asset('images/productos/'.$p->file_image.'.jpg') }}"> @else <img src="{{asset('images/productos/no-image.jpg')}}"> @endif	
+															</td>
 															<td class="codigo-td center">
 																{{ $p->codigo }}	
 															</td>

@@ -23,7 +23,7 @@
 						@forelse($productos as $p)
 							<tr>
 								<td>{{ $p->orden }}</td>
-								<td>@if (file_exists(asset('images/productos/'.$p->file_image.'.jpg'))) <img src="{{ asset('images/productos/'.$p->file_image.'.jpg') }}"> @else <img src="{{asset('images/productos/no-image.jpg')}}" @endif> </td>
+								<td>@if (file_exists(public_path('images/productos/'.$p->file_image.'.jpg')))<img src="{{ asset('images/productos/'.$p->file_image.'.jpg') }}"> @else <img src="{{asset('images/productos/no-image.jpg')}}"> @endif </td>
 								<td>{{ $p->codigo }}</td>
 								<td>{{ $p->descripcion }}</td>
 								<td>{{ $p->familia->nombre }}</td>

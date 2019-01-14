@@ -54,8 +54,8 @@ class ProductoController extends Controller
     public function edit($id)
     {
 		$producto    = Producto::find($id);
-		$familias    = Familia::where('id', '>', '1')->orderBy('orden')->get();
-		$subfamilias = Subfamilia::where('id', '>', '1')->orderBy('orden')->get();
+		$familias    = Familia::orderBy('id')->get();
+		$subfamilias = Subfamilia::orderBy('id')->get();
     	return view('adm.productos.edit', compact('familias', 'subfamilias', 'producto'));
     }
 

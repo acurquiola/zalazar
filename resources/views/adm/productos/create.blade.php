@@ -22,11 +22,16 @@
 								<label for="icon_prefix">Descripción</label>
 							</div>
 
-							<div class="input-field col s4">
+							<div class="input-field col s3">
 								<i class="material-icons prefix">keyboard_arrow_right</i>
 								<input id="icon_prefix" type="text" class="validate" name="file_image"  >
 								<label for="icon_prefix">Imagen</label>
 							</div>
+
+							<div class="input-field col s1">
+								<label for="icon_prefix">.jpg</label>
+							</div>
+							
 							<div class="input-field col s6">
 								<i class="material-icons prefix">keyboard_arrow_right</i>
 								<select class="materialSelect" id="familia" name="familia_id" required>
